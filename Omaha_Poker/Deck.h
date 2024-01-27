@@ -4,9 +4,10 @@
 #include <algorithm>
 #include <ctime>
 
+static const int TOTAL_CARDS = 52;
 class Deck {
 private:
-    Card cards[52];
+    Card cards[TOTAL_CARDS];
     int currentIndex;
 
 public:
@@ -14,4 +15,4 @@ public:
     void generateDeck();
     void shuffleDeck();
     Card dealCard();
-};
+}; 
