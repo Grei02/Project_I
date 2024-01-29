@@ -5,6 +5,7 @@
 class Player {
 private:
     string playerName;
+   // Hand* playerHand;
 public:
     Hand* playerHand;
     Player();

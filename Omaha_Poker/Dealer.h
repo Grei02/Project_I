@@ -13,12 +13,9 @@ private:
     static const int TURN_POSITION = 3;
     static const int RIVER_POSITION = 4;
    
-
     Deck deck;
-    //Card* showedCards[NUM_SHOWED_CARDS];
     int numPlayers;
     Player* players[MAX_PlAYERS];
-                  
 
     void swapCards(Card& card1, Card& card2);
 

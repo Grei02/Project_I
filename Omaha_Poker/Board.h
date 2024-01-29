@@ -14,6 +14,9 @@
 #include "FourOfAKind.h"
 #include "RoyalFlush.h"
 #include "HighCard.h"
+#include "Dealer.h"
+#include "ThreeOfAKind.h"
+#include "FullHouse.h"
 using namespace std;
 const int MAX_HANDS = 6;
 class Board {

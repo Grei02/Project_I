@@ -134,6 +134,7 @@
     <ClCompile Include="DoublePair.cpp" />
     <ClCompile Include="Flush.cpp" />
     <ClCompile Include="FourOfAKind.cpp" />
+    <ClCompile Include="FullHouse.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="HighCard.cpp" />
     <ClCompile Include="Omaha_Poker.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="RoyalFlush.cpp" />
     <ClCompile Include="Straight.cpp" />
     <ClCompile Include="StraightFlush.cpp" />
+    <ClCompile Include="ThreeOfAKind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
@@ -151,6 +153,7 @@
     <ClInclude Include="DoublePair.h" />
     <ClInclude Include="Flush.h" />
     <ClInclude Include="FourOfAKind.h" />
+    <ClInclude Include="FullHouse.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="HighCard.h" />
     <ClInclude Include="Pair.h" />
@@ -158,6 +161,7 @@
     <ClInclude Include="RoyalFlush.h" />
     <ClInclude Include="Straight.h" />
     <ClInclude Include="StraightFlush.h" />
+    <ClInclude Include="ThreeOfAKind.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

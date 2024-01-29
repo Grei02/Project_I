@@ -1,6 +1,6 @@
-#include "FourOfAKind.h"
+#include "ThreeOfAKind.h"
 
-bool FourOfAKind::IsTheOriginCorrect(Card* handFormed, Card* communityCards, Card* playerCards)
+bool ThreeOfAKind::IsTheOriginCorrect(Card* handFormed, Card* communityCards, Card* playerCards)
 {
     int playerCardsInTheHand = 0;
     for (int i = 0; i < 4; i++) {
@@ -20,20 +20,20 @@ bool FourOfAKind::IsTheOriginCorrect(Card* handFormed, Card* communityCards, Car
         }
     }
 
-    if (playerCardsInTheHand == 2 && communityCardsInTheHand == 2) {
+    if (playerCardsInTheHand == 2 && communityCardsInTheHand == 1) {
         return true;
     }
     return false;
 }
 
-void FourOfAKind::swap(Card& card1, Card& card2)
+void ThreeOfAKind::swap(Card& card1, Card& card2)
 {
     Card temp = card1;
     card1 = card2;
     card2 = temp;
 }
 
-void FourOfAKind::sortCards(Card* allCards, int size)
+void ThreeOfAKind::sortCards(Card* allCards, int size)
 {
     for (int i = 0; i < size - 1; i++) {
         for (int j = 0; j < size - i - 1; j++) {
@@ -44,7 +44,7 @@ void FourOfAKind::sortCards(Card* allCards, int size)
     }
 }
 
-bool FourOfAKind::evaluate(Card* communityCards, Card* playerCards)
+bool ThreeOfAKind::evaluate(Card* communityCards, Card* playerCards)
 {
     Card allCards[9];
     for (int i = 0; i < 5; i++) {
@@ -64,13 +64,13 @@ bool FourOfAKind::evaluate(Card* communityCards, Card* playerCards)
         }
     }
 
-    if (count != 4) {
+    if (count != 3) {
         return false;
     }
 
     Card* handFormed;
-    for (int i = index - 4; i < index; i++) {
-        for (int j = 0; j < 4; j++) {
+    for (int i = index - 3; i < index; i++) {
+        for (int j = 0; j < 3; j++) {
             handFormed[j] = allCards[i];
         }
     }

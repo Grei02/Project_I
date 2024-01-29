@@ -1,8 +1,9 @@
 #pragma once
 #include "Hand.h"
 #include "Card.h"
-class FourOfAKind:public Hand
+class ThreeOfAKind:public Hand
 {
+public:
 	bool IsTheOriginCorrect(Card* handFormed, Card* communityCards, Card* playerCards);
 	void swap(Card& card1, Card& card2);
 	void sortCards(Card* allCards, int size);
