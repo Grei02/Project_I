@@ -8,5 +8,6 @@ class Hand
 public:
 	Card* playerHand[maxHandCards];
 	Hand();
+	virtual bool evaluate(Card* commutyCards, Card* playerCards)=0;
 	~Hand();
 };

@@ -15,7 +15,7 @@ private:
    
 
     Deck deck;
-    Card* showedCards[NUM_SHOWED_CARDS];
+    //Card* showedCards[NUM_SHOWED_CARDS];
     int numPlayers;
     Player* players[MAX_PlAYERS];
                   
@@ -23,6 +23,7 @@ private:
     void swapCards(Card& card1, Card& card2);
 
 public:
+    Card* showedCards[NUM_SHOWED_CARDS];
     Dealer();
     ~Dealer();
 

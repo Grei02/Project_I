@@ -131,17 +131,33 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Dealer.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="DoublePair.cpp" />
+    <ClCompile Include="Flush.cpp" />
+    <ClCompile Include="FourOfAKind.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="HighCard.cpp" />
     <ClCompile Include="Omaha_Poker.cpp" />
+    <ClCompile Include="Pair.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RoyalFlush.cpp" />
+    <ClCompile Include="Straight.cpp" />
+    <ClCompile Include="StraightFlush.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Dealer.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="DoublePair.h" />
+    <ClInclude Include="Flush.h" />
+    <ClInclude Include="FourOfAKind.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="HighCard.h" />
+    <ClInclude Include="Pair.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RoyalFlush.h" />
+    <ClInclude Include="Straight.h" />
+    <ClInclude Include="StraightFlush.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

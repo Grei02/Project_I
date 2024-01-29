@@ -5,6 +5,7 @@ int main() {
     board.startGame();
     board.displayPlayerHands();
     board.displayCommunityCards();
+    board.evaluateHands();
 
     return 0;
 }
