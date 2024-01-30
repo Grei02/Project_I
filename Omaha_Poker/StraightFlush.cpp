@@ -68,7 +68,6 @@ bool StraightFlush::evaluate(Card* communityCards, Card* playerCards)
         return false;
     }
 
-    Card* handFormed;
     for (int i = index - 5; i < index; i++) {
         for (int j = 0; j < 5; j++) {
             handFormed[j] = allCards[i];

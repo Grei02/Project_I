@@ -15,7 +15,7 @@ void Player::setPlayerName(string& name)
 	playerName = name;
 }
 
-Hand* Player::getPlayerHand()
+Hand* Player::getPlayerHand() const
 {
 	return playerHand;
 }

@@ -53,7 +53,7 @@ bool FullHouse::evaluate(Card* communityCards, Card* playerCards)
         allCards[i + 5] = playerCards[i];
     }
     sortCards(allCards, 9);
-    Card* handFormed;
+    Card* handFormed = nullptr;
     int index = 0;
     for (int i = 0; i < 9; i++) {
         if (allCards[i].value == allCards[i + 1].value && allCards[i + 1].value == allCards[i + 2].value) {

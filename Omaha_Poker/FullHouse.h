@@ -1,5 +1,6 @@
 #pragma once
 #include "Card.h"
+#include "Hand.h"
 
 class FullHouse:public Hand
 {

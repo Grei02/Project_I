@@ -68,7 +68,6 @@ bool FourOfAKind::evaluate(Card* communityCards, Card* playerCards)
         return false;
     }
 
-    Card* handFormed;
     for (int i = index - 4; i < index; i++) {
         for (int j = 0; j < 4; j++) {
             handFormed[j] = allCards[i];

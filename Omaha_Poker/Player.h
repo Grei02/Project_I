@@ -5,12 +5,11 @@
 class Player {
 private:
     string playerName;
-   // Hand* playerHand;
 public:
     Hand* playerHand;
     Player();
     ~Player();
-    Hand* getPlayerHand();
+    Hand* getPlayerHand() const;
     string getPlayerName();
     void setPlayerName(string& name);
 };

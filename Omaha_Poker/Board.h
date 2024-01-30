@@ -18,12 +18,11 @@
 #include "ThreeOfAKind.h"
 #include "FullHouse.h"
 using namespace std;
-const int MAX_HANDS = 6;
+const int MAX_HANDS = 10;
+
 class Board {
 private:
     Dealer dealer;
-    Hand* hands[MAX_HANDS];
-   
 public:
     Card card;
     void startGame();

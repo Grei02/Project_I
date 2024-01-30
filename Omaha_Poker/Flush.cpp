@@ -9,7 +9,6 @@ bool Flush::evaluate(Card* communityCards, Card* playerCards) {
         }
     }
 
-   
     for (int i = 0; i < 4; ++i) { 
         if (playerCards[i].getSymbol() != palo_carta_1) {
             return false;

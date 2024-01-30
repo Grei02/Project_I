@@ -3,6 +3,8 @@
 #include "Card.h"
 class ThreeOfAKind:public Hand
 {
+private:
+	Card handFormed[4];
 public:
 	bool IsTheOriginCorrect(Card* handFormed, Card* communityCards, Card* playerCards);
 	void swap(Card& card1, Card& card2);

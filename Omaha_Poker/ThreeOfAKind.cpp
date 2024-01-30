@@ -68,9 +68,8 @@ bool ThreeOfAKind::evaluate(Card* communityCards, Card* playerCards)
         return false;
     }
 
-    Card* handFormed;
     for (int i = index - 3; i < index; i++) {
-        for (int j = 0; j < 3; j++) {
+        for (int j = 0; j < 3; j++){
             handFormed[j] = allCards[i];
         }
     }

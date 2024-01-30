@@ -3,12 +3,14 @@
 #include "Straight.h"
 #include "Flush.h"
 
-class StraightFlush:public Hand
+class StraightFlush :public Hand
 {
-	public:
-		bool evaluate(Card* communityCards, Card* playerCards);
-		bool IsTheOriginCorrect(Card* handFormed, Card* communityCards, Card* playerCards);
-		void swap(Card& card1, Card& card2);
-		void sortCards(Card* allCards, int size);
+private:
+	Card handFormed[4];
+public:
+	bool evaluate(Card* communityCards, Card* playerCards);
+	bool IsTheOriginCorrect(Card* handFormed, Card* communityCards, Card* playerCards);
+	void swap(Card& card1, Card& card2);
+	void sortCards(Card* allCards, int size);
 };
 
