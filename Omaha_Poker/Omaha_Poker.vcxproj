@@ -104,10 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\sfml\SFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories> C:\sfml\SFML-2.5.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,12 +138,14 @@
     <ClCompile Include="Flush.cpp" />
     <ClCompile Include="FourOfAKind.cpp" />
     <ClCompile Include="FullHouse.cpp" />
+    <ClCompile Include="GameGraphics.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="HighCard.cpp" />
     <ClCompile Include="Omaha_Poker.cpp" />
     <ClCompile Include="Pair.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RoyalFlush.cpp" />
+    <ClCompile Include="SFML-2.5.1\Source.cpp" />
     <ClCompile Include="Straight.cpp" />
     <ClCompile Include="StraightFlush.cpp" />
     <ClCompile Include="ThreeOfAKind.cpp" />
@@ -154,6 +159,7 @@
     <ClInclude Include="Flush.h" />
     <ClInclude Include="FourOfAKind.h" />
     <ClInclude Include="FullHouse.h" />
+    <ClInclude Include="GameGraphics.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="HighCard.h" />
     <ClInclude Include="Pair.h" />
