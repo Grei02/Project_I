@@ -1,7 +1,7 @@
 #include "Player.h"
 
-Player::Player() : playerHand(new Hand()) {
-	cout << "Enter the player's name: ";
+Player::Player() : playerHand() {
+	cout << "Enter the player's name: ";//eliminar
 	cin >> playerName;
 }
 

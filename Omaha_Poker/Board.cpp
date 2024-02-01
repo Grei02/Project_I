@@ -44,48 +44,49 @@ void Board::displayCommunityCards() {
 	cout << endl;
 }
 
-//void Board::evaluateHands() {
-//	Card** showedCards = dealer.getShowedCards();
-//	Hand** playerCards = dealer.getPlayerHands();
-//
-//	Hand* evaluators[MAX_HANDS];
-//	evaluators[0] = new RoyalFlush();
-//	evaluators[1] = new StraightFlush();
-//	evaluators[2] = new FourOfAKind();
-//	evaluators[3] = new FullHouse();
-//	evaluators[4] = new Flush();
-//	evaluators[5] = new Straight();
-//	evaluators[6] = new ThreeOfAKind();
-//	evaluators[7] = new DoublePair();
-//	evaluators[8] = new Pair();
-//	evaluators[9] = new HighCard();
-//
-//	int winningIndex = -1;
-//	bool isTie = false;
-//
-//	for (int i = 0; i < dealer.getNumPlayers(); i++) {
-//		Hand* playerHand = dealer.getPlayers()[i]->getPlayerHand();
-//		for (int j = 0; j < 7; j++) {
-//			if (evaluators[j]->evaluate(showedCards[i], playerHand->playerHand)) {
-//				if (winningIndex == -1) {
-//					winningIndex = i;
-//				}
-//				else if (winningIndex != i) {
-//					isTie = true;
-//					break;
-//				}
-//			}
-//		}
-//	}
-//
-//	if (winningIndex != -1 && !isTie) {
-//		cout << dealer.getPlayers()[winningIndex]->getPlayerName() << " wins!" << std::endl;
-//	}
-//	else if (isTie) {
-//		cout << "It's a tie!" << std::endl;
-//	}
-//	else {
-//		cout << "No winner found!" << std::endl;
-//	}
-//}
-//
+void Board::evaluateHands() {
+	Card** showedCards = dealer.getShowedCards();
+	Hand** playerCards = dealer.getPlayerHands();
+
+	Hand* evaluators[MAX_HANDS];
+	evaluators[0] = new RoyalFlush();
+	evaluators[1] = new StraightFlush();
+	evaluators[2] = new FourOfAKind();
+	evaluators[3] = new FullHouse();
+	evaluators[4] = new Flush();
+	evaluators[5] = new Straight();
+	evaluators[6] = new ThreeOfAKind();
+	evaluators[7] = new DoublePair();
+	evaluators[8] = new Pair();
+	evaluators[9] = new HighCard();
+
+	int winningIndex = -1;
+	bool isTie = false;
+
+	for (int i = 0; i < dealer.getNumPlayers(); i++) {
+		Hand* playerHand = dealer.getPlayers()[i]->getPlayerHand();
+		for (int j = 0; j < 7; j++) {
+			Card* aCard = playerHand->playerHand;
+			if (evaluators[j]->evaluate(showedCards[i], aCard)) {
+				if (winningIndex == -1) {
+					winningIndex = i;
+				}
+				else if (winningIndex != i) {
+					isTie = true;
+					break;
+				}
+			}
+		}
+	}
+
+	if (winningIndex != -1 && !isTie) {
+		cout << dealer.getPlayers()[winningIndex]->getPlayerName() << " wins!" << std::endl;
+	}
+	else if (isTie) {
+		cout << "It's a tie!" << std::endl;
+	}
+	else {
+		cout << "No winner found!" << std::endl;
+	}
+}
+
