@@ -9,10 +9,9 @@ void Board::displayPlayerHands() {
 	Hand** playerCards = dealer.getPlayerHands();
 
 	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
-
 		cout << dealer.getPlayers()[i]->getPlayerName() << "'s cards: ";
 		for (int j = 0; j < 4; ++j) {
-			cout << playerCards[i]->playerHand[j]->getValue() << playerCards[i]->playerHand[j]->getSymbol() << " ";
+			cout << playerCards[i]->playerHand[j].getValue() << playerCards[i]->playerHand[j].getSymbol() << " ";
 		}
 		cout << endl;
 	}

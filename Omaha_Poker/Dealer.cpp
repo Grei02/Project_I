@@ -1,5 +1,4 @@
 #include "Dealer.h"
-#include "Dealer.h"
 
 void Dealer::swapCards(Card& card1, Card& card2)
 {
@@ -36,8 +35,7 @@ void Dealer::dealCards()
 	for (int i = 0; i < numPlayers; i++) {
 		for (int j = 0; j < NUM_CARDS_PER_PLAYER; j++) {
 			Card tempCard = deck.dealCard();
-
-			players[i]->getPlayerHand()->playerHand[j] = new Card(tempCard.getValue(), tempCard.getSymbol());
+			players[i]->getPlayerHand().playerHand[j] = new Card(tempCard.getValue(), tempCard.getSymbol());
 		}
 	}
 
