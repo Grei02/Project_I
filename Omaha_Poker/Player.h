@@ -2,15 +2,21 @@
 #include "Hand.h"
 #include <string>
 
+const int maxHandCards = 4;
 class Player {
 private:
-    string playerName;
+  
 public:
-    Hand* playerHand;
     Player();
     ~Player();
+    Hand* playerHand;
+    //Card* playerHand[maxHandCards];
+    //void getPlayerHand();
+    //void deletePlayerHand();
+   
+  
+    
     Hand* getPlayerHand() const;
-    string getPlayerName();
-    void setPlayerName(string& name);
+
 };
 
