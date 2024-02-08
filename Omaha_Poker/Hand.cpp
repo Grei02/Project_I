@@ -1,8 +1,12 @@
 #include "Hand.h"
 
-void Hand::getPlayerHand()
+Hand::Hand()
 {
     for (int i = 0; i < maxHandCards; i++) {
-        playerHand[i] = new Card();
+        playerHand[i] = Card();
     }
+}
+
+Hand::~Hand()
+{
 }

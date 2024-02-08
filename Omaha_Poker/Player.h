@@ -1,22 +1,19 @@
 #pragma once
 #include "Hand.h"
 #include <string>
+using namespace std;
 
-const int maxHandCards = 4;
 class Player {
 private:
-  
+    Hand* playerHand;
+    string playerName;
 public:
     Player();
-    ~Player();
-    Hand* playerHand;
-    //Card* playerHand[maxHandCards];
-    //void getPlayerHand();
-    //void deletePlayerHand();
-   
-  
-    
-    Hand* getPlayerHand() const;
 
+    ~Player();
+
+    void setPlayerName(string& name);
+    string getPlayerName();
+    Hand* getPlayerHand();
 };
 

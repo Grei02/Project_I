@@ -1,4 +1,5 @@
 #include "Straight.h"
+using namespace std;
 
 
 bool Straight::evaluate(Card* communityCards, Card* playerCards)

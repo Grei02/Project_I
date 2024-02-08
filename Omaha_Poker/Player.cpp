@@ -1,27 +1,20 @@
 #include "Player.h"
 
-
-//Player::Player() : playerHand() {
-//	cout << "Enter the player's name: ";//eliminar
-//	cin >> playerName;
-//}
-//
-//Player::~Player()
-//{
-//	delete playerHand;
-//}
-//
-//void Player::setPlayerName(string& name)
-//{
-//	playerName = name;
-//}
-//
-Hand* Player::getPlayerHand() const
-{
-	return playerHand;
+Player::Player() : playerHand() {
 }
-//
-//string Player::getPlayerName()
-//{
-//	return playerName;
-//}
+
+void Player::setPlayerName(string& name) {
+    playerName = name;
+}
+
+Hand* Player::getPlayerHand() {
+    return playerHand;
+}
+
+string Player::getPlayerName() {
+    return playerName;
+}
+Player::~Player()
+{
+	delete playerHand;
+}

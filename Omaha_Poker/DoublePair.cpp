@@ -1,5 +1,6 @@
 #include "DoublePair.h"
 #include <set>
+using namespace std;
 
 bool DoublePair::evaluate(Card* communityCards, Card* playerCards) {
     int pairs = 0;
