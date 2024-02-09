@@ -3,7 +3,7 @@
 Hand::Hand()
 {
     for (int i = 0; i < maxHandCards; i++) {
-        playerHand[i] = Card();
+        playerHand[i] = new Card();
     }
 }
 

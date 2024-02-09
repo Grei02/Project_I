@@ -6,12 +6,12 @@ void Board::startGame()
 }
 
 void Board::displayPlayerHands() {
-	Hand** playerCards = dealer.getPlayerHands();
+	Card** playerCards = dealer.getPlayerHands();
 
 	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
 		cout << dealer.getPlayers()[i]->getPlayerName() << "'s cards: ";
 		for (int j = 0; j < 4; ++j) {
-			cout << playerCards[i]->playerHand[j].getValue() << playerCards[i]->playerHand[j].getSymbol() << " ";
+			cout << playerCards[i]->value << playerCards[i]->symbol << " ";
 		}
 		cout << endl;
 	}
@@ -45,7 +45,7 @@ void Board::displayCommunityCards() {
 
 void Board::evaluateHands() {
 	Card** showedCards = dealer.getShowedCards();
-	Hand** playerCards = dealer.getPlayerHands();
+	Card** playerCards = dealer.getPlayerHands();
 
 	Hand* evaluators[MAX_HANDS];
 	evaluators[0] = new RoyalFlush();
@@ -63,9 +63,9 @@ void Board::evaluateHands() {
 	bool isTie = false;
 
 	for (int i = 0; i < dealer.getNumPlayers(); i++) {
-		Hand* playerHand = dealer.getPlayers()[i]->getPlayerHand();
+		Card* playerHand = dealer.getPlayers()[i]->getPlayerHand();
 		for (int j = 0; j < 7; j++) {
-			Card* aCard = playerHand->playerHand;
+			Card* aCard = playerHand;
 			if (evaluators[j]->evaluate(showedCards[i], aCard)) {
 				if (winningIndex == -1) {
 					winningIndex = i;

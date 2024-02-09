@@ -5,7 +5,7 @@ using namespace std;
 
 class Player {
 private:
-    Hand* playerHand;
+    Card* playerHand;
     string playerName;
 public:
     Player();
@@ -13,7 +13,12 @@ public:
 
     void setPlayerName(const string& name); 
     string getPlayerName();
+<<<<<<< HEAD
     Hand* getPlayerHand();
+=======
+    Card* getPlayerHand();
+    void setPlayerHandPosition(Card newCard,int index);
+>>>>>>> 475e0bd461c094140f83f7179d9835efbd834820
 
 };
 
