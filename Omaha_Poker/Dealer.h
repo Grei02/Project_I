@@ -26,7 +26,7 @@ public:
     void requestNumPlayers();
     void dealCards();
 
-    Hand** getPlayerHands();
+    Card** getPlayerHands();
     Card** getFlop();
     Card** getTurn();
     Card** getRiver();

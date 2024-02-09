@@ -18,9 +18,9 @@ Dealer::~Dealer()
 	}
 }
 
-Hand** Dealer::getPlayerHands()
+Card** Dealer::getPlayerHands()
 {
-	Hand** playerHands = new Hand * [numPlayers];
+	Card** playerHands = new Card * [numPlayers];
 
 	for (int i = 0; i < numPlayers; i++) {
 		playerHands[i] = players[i]->getPlayerHand();
@@ -46,7 +46,7 @@ void Dealer::dealCards()
 	for (int i = 0; i < numPlayers; i++) {
 		for (int j = 0; j < NUM_CARDS_PER_PLAYER; j++) {
 			Card tempCard = deck.dealCard();
-			players[i]->setPlayerHand()->playerHand[j] = Card(tempCard.getValue(), tempCard.getSymbol());
+			players[i]->setPlayerHandPosition(Card(tempCard.getValue(), tempCard.getSymbol()), j);
 		}
 	}
 

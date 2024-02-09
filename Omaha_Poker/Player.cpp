@@ -7,8 +7,13 @@ void Player::setPlayerName(const string& name) {
     playerName = name;
 }
 
-Hand* Player::getPlayerHand() {
+Card* Player::getPlayerHand() {
     return playerHand;
+}
+
+void Player::setPlayerHandPosition(Card newCard, int index)
+{
+    playerHand[index]=newCard;
 }
 
 string Player::getPlayerName() {
