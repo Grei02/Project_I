@@ -7,7 +7,7 @@ GameGraphics::GameGraphics() : window(VideoMode(1200, 650), "Omaha Poker") {
     startScreenSprite.setTexture(startScreenTexture);
 
     startButton.setSize(Vector2f(150, 50));
-    startButton.setFillColor(Color(255, 0, 0, 150));
+    startButton.setFillColor(Color(0, 0, 0, 70));
     startButton.setPosition((window.getSize().x - startButton.getSize().x) / 2, (window.getSize().y - startButton.getSize().y) / 2 + 250);
 
     if (!font.loadFromFile("Honk-Regular.ttf")) {
@@ -16,9 +16,9 @@ GameGraphics::GameGraphics() : window(VideoMode(1200, 650), "Omaha Poker") {
 
     buttonText.setFont(font);
     buttonText.setString("Inicio");
-    buttonText.setCharacterSize(24);
+    buttonText.setCharacterSize(60);
     buttonText.setFillColor(Color::White);
-    buttonText.setPosition(startButton.getPosition().x + 20, startButton.getPosition().y + 10);
+    buttonText.setPosition(startButton.getPosition().x + 3 , startButton.getPosition().y-20 );
 }
 
 void GameGraphics::run() {
