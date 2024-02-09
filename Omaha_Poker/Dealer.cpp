@@ -46,7 +46,7 @@ void Dealer::dealCards()
 	for (int i = 0; i < numPlayers; i++) {
 		for (int j = 0; j < NUM_CARDS_PER_PLAYER; j++) {
 			Card tempCard = deck.dealCard();
-			players[i]->setPlayerHand()->playerHand[j] = Card(tempCard.getValue(), tempCard.getSymbol());
+			/*players[i]->setPlayerHand()->playerHand[j] = Card(tempCard.getValue(), tempCard.getSymbol());*/
 		}
 	}
 
