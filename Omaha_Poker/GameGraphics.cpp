@@ -1,24 +1,18 @@
 #include "GameGraphics.h"
 #include <iostream>
+
 using namespace std;
+using namespace sf;
 
 GameGraphics::GameGraphics() : window(VideoMode(1200, 650), "Omaha Poker") {
-    startScreenTexture.loadFromFile("inicio.png");
-    startScreenSprite.setTexture(startScreenTexture);
+    setupStartScreen();
+}
 
-    startButton.setSize(Vector2f(150, 50));
-    startButton.setFillColor(Color(0, 0, 0, 70));
-    startButton.setPosition((window.getSize().x - startButton.getSize().x) / 2, (window.getSize().y - startButton.getSize().y) / 2 + 250);
-
-    if (!font.loadFromFile("Honk-Regular.ttf")) {
-        cerr << "Error al cargar la fuente de texto." << endl;
+void GameGraphics::setupStartScreen() {
+    if (!startScreenTexture.loadFromFile("C:/projects/Project_I/Omaha_Poker/images/inicio.png")) {
+        cerr << "Error al cargar la textura de la pantalla de inicio." << endl;
     }
-
-    buttonText.setFont(font);
-    buttonText.setString("Inicio");
-    buttonText.setCharacterSize(60);
-    buttonText.setFillColor(Color::White);
-    buttonText.setPosition(startButton.getPosition().x + 3 , startButton.getPosition().y-20 );
+    startScreenSprite.setTexture(startScreenTexture);
 }
 
 void GameGraphics::run() {
@@ -31,14 +25,25 @@ void GameGraphics::run() {
 void GameGraphics::handleEvents() {
     Event event;
     while (window.pollEvent(event)) {
+
         if (event.type == Event::Closed) {
             window.close();
         }
 
         if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+
             Vector2i mousePosition = Mouse::getPosition(window);
-            if (startButton.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
-                
+            cout << "Mouse pressed at position: (" << mousePosition.x << ", " << mousePosition.y << ")" << endl;
+            FloatRect specificArea(992, 580, 1172, 626);
+            if (specificArea.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
+                cout << "Click inside the specific area." << endl;
+                Texture instructionsTexture;
+                if (instructionsTexture.loadFromFile("C:/projects/Project_I/Omaha_Poker/images/instructions.png")) {
+                    startScreenSprite.setTexture(instructionsTexture);
+                }
+                else {
+                    cerr << "Error al cargar la textura 'instructions.png'" << endl;
+                }
             }
         }
     }
@@ -47,7 +52,5 @@ void GameGraphics::handleEvents() {
 void GameGraphics::render() {
     window.clear();
     window.draw(startScreenSprite);
-    window.draw(startButton);
-    window.draw(buttonText); 
     window.display();
 }

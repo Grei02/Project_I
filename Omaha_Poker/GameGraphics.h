@@ -4,18 +4,15 @@ using namespace sf;
 
 class GameGraphics {
 private:
+    RenderWindow window;
+    Texture startScreenTexture;
+    Sprite startScreenSprite;
 
-	RenderWindow window;
-	Texture startScreenTexture;
-	Sprite startScreenSprite;
-	RectangleShape startButton;
-	Font font;
-	Text buttonText;
-	void handleEvents();
-	void render();
+    void setupStartScreen();
+    void handleEvents();
+    void render();
 
 public:
-	GameGraphics();
-	void run();
-
+    GameGraphics();
+    void run();
 };
