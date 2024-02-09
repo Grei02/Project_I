@@ -9,11 +9,12 @@ private:
     string playerName;
 public:
     Player();
-
     ~Player();
 
-    void setPlayerName(string& name);
+    void setPlayerName(const string& name); 
     string getPlayerName();
     Hand* getPlayerHand();
+    //void setPlayerHandPosition(Card);
+
 };
 

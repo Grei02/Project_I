@@ -31,6 +31,6 @@ public:
     Card** getTurn();
     Card** getRiver();
     Card** getShowedCards();
-    int getNumPlayers() const;
+    int getNumPlayers() ;
     Player** getPlayers();
 };

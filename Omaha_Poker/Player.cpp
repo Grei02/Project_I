@@ -1,9 +1,9 @@
 #include "Player.h"
 
-Player::Player() : playerHand() {
+Player::Player() : playerHand() { 
 }
 
-void Player::setPlayerName(string& name) {
+void Player::setPlayerName(const string& name) { 
     playerName = name;
 }
 
@@ -14,7 +14,7 @@ Hand* Player::getPlayerHand() {
 string Player::getPlayerName() {
     return playerName;
 }
-Player::~Player()
-{
-	delete playerHand;
+
+Player::~Player() {
+    delete playerHand;
 }
