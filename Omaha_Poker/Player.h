@@ -13,7 +13,9 @@ public:
 
     void setPlayerName(const string& name); 
     string getPlayerName();
+   // Hand * getPlayerHand();
     Card* getPlayerHand();
+
     void setPlayerHandPosition(Card newCard,int index);
 
 };

@@ -8,6 +8,7 @@ void Player::setPlayerName(const string& name) {
 }
 
 Card* Player::getPlayerHand() {
+
     return playerHand;
 }
 

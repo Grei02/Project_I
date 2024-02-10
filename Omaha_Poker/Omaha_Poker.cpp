@@ -2,12 +2,13 @@
 #include "GameGraphics.h"
 
 int main() {
-	GameGraphics game;
+GameGraphics game;
 	/*Board board;
 	board.startGame();
 	board.displayPlayerHands();
 	board.displayCommunityCards();
 	board.evaluateHands();*/
-	game.run();
+game.run();
 	return 0;
 }
+
