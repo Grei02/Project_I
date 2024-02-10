@@ -52,7 +52,7 @@ void Dealer::dealCards()
 
 	for (int i = 0; i < NUM_SHOWED_CARDS; i++) {
 		Card tempCard = deck.dealCard();
-		showedCards[i] = new Card(tempCard.getValue(), tempCard.getSymbol());
+		showedCards[i] = new Card(tempCard.value, tempCard.symbol);
 	}
 }
 
