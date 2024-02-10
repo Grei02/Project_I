@@ -5,7 +5,7 @@ GameGraphics::GameGraphics() : window(VideoMode(1200, 650), "Omaha Poker") {
 }
 
 void GameGraphics::setupStartScreen() {
-    if (!startScreenTexture.loadFromFile("C:/projects/Project_I/Omaha_Poker/images/inicio.png")) {
+    if (!startScreenTexture.loadFromFile("images/inicio.png")) {
         cerr << "Error al cargar la textura de la pantalla de inicio." << endl;
     }
     startScreenSprite.setTexture(startScreenTexture);
@@ -34,11 +34,11 @@ void GameGraphics::handleMouseEvents(const Event& event) {
     if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
         Vector2i mousePosition = Mouse::getPosition(window);
         if (!instructionsLoaded && isInsideSpecificArea(mousePosition)) {
-            loadAndSetInstructionsTexture("C:/projects/Project_I/Omaha_Poker/images/instructions.png");
+            loadAndSetInstructionsTexture("images/instructions.png");
             instructionsLoaded = true;
         }
         else if (instructionsLoaded && isInsideSpecificAreaInstruccions(mousePosition)) {
-            loadAndSetGameBackgroundTexture("C:/projects/Project_I/Omaha_Poker/images/gameBackground.png");
+            loadAndSetGameBackgroundTexture("images/gameBackground.png");
         }
     }
 }
