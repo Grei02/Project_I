@@ -29,14 +29,23 @@ void GameGraphics::handleEvents() {
 }
 
 void GameGraphics::handleMouseEvents(const Event& event) {
+    static bool instructionsLoaded = false;
+
     if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
         Vector2i mousePosition = Mouse::getPosition(window);
-        cout << "Mouse pressed at position: (" << mousePosition.x << ", " << mousePosition.y << ")" << endl;
-        if (isInsideSpecificArea(mousePosition)) {
-            cout << "Click inside the specific area." << endl;
+        if (!instructionsLoaded && isInsideSpecificArea(mousePosition)) {
             loadAndSetInstructionsTexture("C:/projects/Project_I/Omaha_Poker/images/instructions.png");
+            instructionsLoaded = true;
+        }
+        else if (instructionsLoaded && isInsideSpecificAreaInstruccions(mousePosition)) {
+            loadAndSetGameBackgroundTexture("C:/projects/Project_I/Omaha_Poker/images/gameBackground.png");
         }
     }
+}
+
+bool GameGraphics::isInsideSpecificAreaInstruccions(const Vector2i& mousePosition) {
+    FloatRect specificArea(992, 580, 1172, 630);
+    return specificArea.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 }
 
 bool GameGraphics::isInsideSpecificArea(const Vector2i& mousePosition) {
@@ -45,11 +54,19 @@ bool GameGraphics::isInsideSpecificArea(const Vector2i& mousePosition) {
 }
 
 void GameGraphics::loadAndSetInstructionsTexture(const string& filename) {
-    if (!startScreenTexture.loadFromFile(filename)) {
+    if (!instructionsTexture.loadFromFile(filename)) {
         cerr << "Error al cargar la textura 'instructions.png'" << endl;
         return;
     }
-    startScreenSprite.setTexture(startScreenTexture);
+    startScreenSprite.setTexture(instructionsTexture);
+}
+
+void GameGraphics::loadAndSetGameBackgroundTexture(const string& filename) {
+    if (!gameBackgroundTexture.loadFromFile(filename)) {
+        cerr << "Error al cargar la textura 'gameBackground.png'" << endl;
+        return;
+    }
+    startScreenSprite.setTexture(gameBackgroundTexture);
 }
 
 void GameGraphics::render() {
