@@ -130,6 +130,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bet.cpp" />
+    <ClCompile Include="BlindBet.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Dealer.cpp" />
@@ -150,6 +152,8 @@
     <ClCompile Include="ThreeOfAKind.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bet.h" />
+    <ClInclude Include="BlindBet.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Dealer.h" />

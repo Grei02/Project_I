@@ -147,7 +147,7 @@ void GameGraphics::loadAndSetGameBackgroundTexture(const string& filename) {
         gameBackgroundTexture = newTexture;
         gameBackgroundSprite.setTexture(gameBackgroundTexture);
         cout << "Imagen cargada correctamente" << endl;
-    }
+    } 
     else {
         cerr << "Error al cargar la textura del fondo del juego." << endl;
     }

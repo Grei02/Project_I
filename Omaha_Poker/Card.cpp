@@ -8,10 +8,10 @@ Card::Card(int _value, char _symbol)
 	value = _value;
 	symbol = _symbol;
 	direction = folder + _symbol + to_string(_value) + format;
-	if (!imagen.loadFromFile(direction)) {
+	if (!image.loadFromFile(direction)) {
 		cerr<<"error al cargar"<<direction<<endl;
 	}
-	spriteImagen.setTexture(imagen);
+	spriteImage.setTexture(image);
 }
 
 int Card::getValue()
@@ -24,9 +24,9 @@ char Card::getSymbol()
 	return symbol;
 }
 
-Texture Card::getImagen()
+Texture Card::getImage()
 {
-	return imagen;
+	return image;
 }
 
 Card::~Card()
