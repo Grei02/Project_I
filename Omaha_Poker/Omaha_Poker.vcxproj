@@ -137,6 +137,7 @@
     <ClCompile Include="Dealer.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DoublePair.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Flush.cpp" />
     <ClCompile Include="FourOfAKind.cpp" />
     <ClCompile Include="FullHouse.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Dealer.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DoublePair.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="Flush.h" />
     <ClInclude Include="FourOfAKind.h" />
     <ClInclude Include="FullHouse.h" />

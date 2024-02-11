@@ -5,14 +5,26 @@ GameGraphics::GameGraphics() : window(VideoMode(1200, 650), "Omaha Poker") {
 }
 
 void GameGraphics::run() {
+
 	while (window.isOpen()) {
 		handleEvents();
 		render();
 		if (numPlayersEntered && instructionsLoaded) {
-			loadAndSetGameBackgroundTexture("C:/projects/Project_I/Omaha_Poker/images/gameBackground.png");
+			loadAndSetGameBackgroundTexture("images/gameBackground.png");
 			instructionsScreen = false;
 		}
 	}
+
+    while (window.isOpen()) {
+        handleEvents();
+        render();
+
+        if (numPlayersEntered && instructionsLoaded) {
+            loadAndSetGameBackgroundTexture("images/gameBackground.png");
+
+            instructionsScreen = false;
+        }
+    }
 }
 
 void GameGraphics::handleEvents() {
@@ -115,7 +127,6 @@ void GameGraphics::handleKeyPress(sf::Keyboard::Key key) {
 	}
 }
 
-
 bool GameGraphics::isInsideSpecificAreaInstruccions(Vector2i mousePosition) {
 	FloatRect specificArea(992, 580, 1172, 630);
 	return specificArea.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
@@ -172,9 +183,18 @@ void GameGraphics::showErrorMessage(string message) {
 	window.draw(errorMessage);
 	window.display();
 	errorMessageActive = true;
+
+    /*for (int i = 0; i < numPlayers; ++i) {
+        Card* playerHand = players[i]->getPlayerHand();
+        for (int j = 0; j < NUM_CARDS_PLAYER; ++j) {
+            const sf::Texture* texture = playerHand[j].getImage();
+            sf::Sprite cardSprite(*texture);
+            cardSprite.setPosition(100 + j * 120, 100 + i * 150);
+            window.draw(cardSprite);
+        }
+    }*/
+
 }
-
-
 
 void GameGraphics::render() {
 	window.clear();
