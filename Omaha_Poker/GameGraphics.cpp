@@ -10,7 +10,7 @@ void GameGraphics::run() {
         render();
 
         if (numPlayersEntered && instructionsLoaded) {
-            loadAndSetGameBackgroundTexture("C:/projects/Project_I/Omaha_Poker/images/gameBackground.png");
+            loadAndSetGameBackgroundTexture("images/gameBackground.png");
 
             instructionsScreen = false;
         }
@@ -154,9 +154,9 @@ void GameGraphics::displayPlayerCards(Dealer& dealer, sf::RenderWindow& window) 
     int numPlayers = dealer.getNumPlayers();
 
     for (int i = 0; i < numPlayers; ++i) {
-        Card** playerHand = players[i]->getPlayerHand();
-        for (int j = 0; j < NUM_CARDS_PER_PLAYER; ++j) {
-            const sf::Texture* texture = playerHand[j]->getImage();
+        Card* playerHand = players[i]->getPlayerHand();
+        for (int j = 0; j < NUM_CARDS_PLAYER; ++j) {
+            const sf::Texture* texture = playerHand[j].getImage();
             sf::Sprite cardSprite(*texture);
             cardSprite.setPosition(100 + j * 120, 100 + i * 150);
             window.draw(cardSprite);

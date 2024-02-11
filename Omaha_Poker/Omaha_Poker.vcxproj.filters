@@ -1,156 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Bet.cpp" />
+    <ClCompile Include="BlindBet.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Dealer.cpp" />
+    <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="DoublePair.cpp" />
+    <ClCompile Include="Flush.cpp" />
+    <ClCompile Include="FourOfAKind.cpp" />
+    <ClCompile Include="FullHouse.cpp" />
+    <ClCompile Include="GameGraphics.cpp" />
+    <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="HighCard.cpp" />
+    <ClCompile Include="Omaha_Poker.cpp" />
+    <ClCompile Include="Pair.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RoyalFlush.cpp" />
+    <ClCompile Include="Straight.cpp" />
+    <ClCompile Include="StraightFlush.cpp" />
+    <ClCompile Include="ThreeOfAKind.cpp" />
+    <ClCompile Include="FileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Omaha_Poker.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Card.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Hand.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Dealer.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Deck.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Pair.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="DoublePair.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Flush.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Straight.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="StraightFlush.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="FourOfAKind.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="RoyalFlush.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="HighCard.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="ThreeOfAKind.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="FullHouse.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="GameGraphics.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="BlindBet.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Bet.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-=======
-    <ClCompile Include="Bet.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="BlindBet.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
->>>>>>> b7c45bf5a10754f9f44e291d860ac0d0f0b7326f
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Card.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Hand.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Dealer.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Deck.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Pair.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="DoublePair.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Flush.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Straight.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="StraightFlush.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="FourOfAKind.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="RoyalFlush.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="HighCard.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="ThreeOfAKind.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="FullHouse.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="GameGraphics.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="BlindBet.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Bet.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-=======
-    <ClInclude Include="Bet.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="BlindBet.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
->>>>>>> b7c45bf5a10754f9f44e291d860ac0d0f0b7326f
+    <ClInclude Include="Bet.h" />
+    <ClInclude Include="BlindBet.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Card.h" />
+    <ClInclude Include="Dealer.h" />
+    <ClInclude Include="Deck.h" />
+    <ClInclude Include="DoublePair.h" />
+    <ClInclude Include="Flush.h" />
+    <ClInclude Include="FourOfAKind.h" />
+    <ClInclude Include="FullHouse.h" />
+    <ClInclude Include="GameGraphics.h" />
+    <ClInclude Include="Hand.h" />
+    <ClInclude Include="HighCard.h" />
+    <ClInclude Include="Pair.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="RoyalFlush.h" />
+    <ClInclude Include="Straight.h" />
+    <ClInclude Include="StraightFlush.h" />
+    <ClInclude Include="ThreeOfAKind.h" />
+    <ClInclude Include="FileManager.h" />
   </ItemGroup>
 </Project>
