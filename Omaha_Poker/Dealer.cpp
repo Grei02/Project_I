@@ -18,24 +18,16 @@ Dealer::~Dealer()
 	}
 }
 
-Card** Dealer::getPlayerHands() {
+Card** Dealer::getPlayerHands()
+{
 	Card** playerHands = new Card * [numPlayers];
 
-	for (int i = 0; i < numPlayers; ++i) {
-		Card* playerHand = new Card[NUM_CARDS_PER_PLAYER];
-		for (int j = 0; j < NUM_CARDS_PER_PLAYER; ++j) {
-			playerHand[j] = players[i]->getPlayerHand()[j];
-		}
-
-		playerHands[i] = playerHand;
+	for (int i = 0; i < numPlayers; i++) {
+		playerHands[i] = players[i]->getPlayerHand();
 	}
 
 	return playerHands;
 }
-
-
-
-
 
 void Dealer::requestNumPlayers()
 {
@@ -49,21 +41,20 @@ void Dealer::requestNumPlayers()
 	}
 }
 
-void Dealer::dealCards() {
+void Dealer::dealCards()
+{
 	for (int i = 0; i < numPlayers; i++) {
 		for (int j = 0; j < NUM_CARDS_PER_PLAYER; j++) {
 			Card tempCard = deck.dealCard();
-			players[i]->setPlayerHandPosition(&tempCard, j);
+			players[i]->setPlayerHandPosition(Card(tempCard.getValue(), tempCard.getSymbol()), j);
 		}
 	}
 
 	for (int i = 0; i < NUM_SHOWED_CARDS; i++) {
 		Card tempCard = deck.dealCard();
-		showedCards[i] = new Card(tempCard.getValue(), tempCard.getSymbol()); 
+		showedCards[i] = new Card(tempCard.value, tempCard.symbol);
 	}
 }
-
-
 
 Card** Dealer::getFlop()
 {

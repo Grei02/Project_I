@@ -2,15 +2,12 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Dealer.h"
 
 using namespace std;
 using namespace sf;
 
 class GameGraphics {
 private:
-    Dealer dealer;
-    const int NUM_CARDS_PLAYER = 4;
     RenderWindow window;
     Texture startScreenTexture;
     Texture instructionsTexture;
@@ -34,7 +31,6 @@ private:
     bool isInsideSpecificArea(const Vector2i& mousePosition);
     void loadAndSetInstructionsTexture(const string& filename);
     void loadAndSetGameBackgroundTexture(const string& filename);
-    void displayPlayerCards(Dealer& dealer, sf::RenderWindow& window);
     void setupUI();
     void handleTextInput(sf::Uint32 unicode);
     void handleKeyPress(sf::Keyboard::Key key);

@@ -7,7 +7,7 @@ private:
 	int amount;
 public:
 	Bet() {}
-	Bet(const Player& _bettor, int _amount ): bettor(_bettor), amount(_amount) {}
+	Bet(Player _bettor, int _amount);
 	Player getBettor();
 	int getAmount();
 

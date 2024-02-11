@@ -7,14 +7,13 @@ class Card
 {
 public:
 	int value;
-    char symbol;
-    sf::Texture image;
-    sf::Sprite spriteImage;
-
-    Card() {};
-    Card(int _value, char _symbol);
-    int getValue() ; 
-    char getSymbol();
-    const sf::Texture* getImage();
-    ~Card();
+	char symbol;
+	Texture image;
+	Sprite spriteImage;
+	Card() {};
+	Card(int _value, char _symbol);
+	int getValue();
+	char getSymbol();
+	Texture getImage();
+	~Card();
 };

@@ -9,9 +9,12 @@ void GameGraphics::run() {
         handleEvents();
         render();
 
+        // Verificar si se han ingresado jugadores y las instrucciones están cargadas
         if (numPlayersEntered && instructionsLoaded) {
+            // Cargar el fondo del juego
             loadAndSetGameBackgroundTexture("C:/projects/Project_I/Omaha_Poker/images/gameBackground.png");
 
+            // Cambiar instructionsScreen a falso para cambiar a la pantalla de inicio
             instructionsScreen = false;
         }
     }
@@ -108,7 +111,7 @@ void GameGraphics::handleKeyPress(sf::Keyboard::Key key) {
         if (numPlayers >= 2 && numPlayers <= 6) {
             std::cout << "Comenzando juego con " << numPlayers << " jugadores." << std::endl;
             numPlayersEntered = true;
-            instructionsScreen = false; 
+            instructionsScreen = false; // Cambiar a la pantalla de inicio
         }
         else {
             std::cerr << "Por favor, ingrese un número de jugadores válido (entre 2 y 6)." << std::endl;
@@ -149,37 +152,32 @@ void GameGraphics::loadAndSetGameBackgroundTexture(const string& filename) {
         cerr << "Error al cargar la textura del fondo del juego." << endl;
     }
 }
-void GameGraphics::displayPlayerCards(Dealer& dealer, sf::RenderWindow& window) {
-    Player** players = dealer.getPlayers();
-    int numPlayers = dealer.getNumPlayers();
-
-    for (int i = 0; i < numPlayers; ++i) {
-        Card** playerHand = players[i]->getPlayerHand();
-        for (int j = 0; j < NUM_CARDS_PER_PLAYER; ++j) {
-            const sf::Texture* texture = playerHand[j]->getImage();
-            sf::Sprite cardSprite(*texture);
-            cardSprite.setPosition(100 + j * 120, 100 + i * 150);
-            window.draw(cardSprite);
-        }
-    }
-}
-
 
 void GameGraphics::render() {
     
     window.clear();
 
-    if (instructionsScreen && instructionsLoaded) {
-        window.draw(instructionsSprite);
-        window.draw(text);
-        window.draw(inputBox);
-        window.draw(inputText);
-    }
-    else if (!instructionsScreen && numPlayersEntered && instructionsLoaded) {
-        window.draw(gameBackgroundSprite);
+    if (instructionsScreen) {
+        if (instructionsLoaded) {
+         
+            window.draw(instructionsSprite);
+            window.draw(text);
+            window.draw(inputBox);
+            window.draw(inputText);
+        }
+        else {
+           
+            window.draw(startScreenSprite);
+        }
     }
     else {
-        window.draw(startScreenSprite);
+        if (numPlayersEntered && instructionsLoaded) {
+         
+            window.draw(gameBackgroundSprite);
+        }
+        else {
+            window.draw(startScreenSprite);
+        }
     }
     window.display();
 }

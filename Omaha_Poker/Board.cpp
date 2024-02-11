@@ -65,7 +65,7 @@ void Board::evaluateHands() {
 	for (int i = 0; i < dealer.getNumPlayers(); i++) {
 		Card* playerHand = dealer.getPlayers()[i]->getPlayerHand();
 		for (int j = 0; j < 7; j++) {
-			Card* aCard = &playerHand[j];
+			Card* aCard = playerHand;
 			if (evaluators[j]->evaluate(showedCards[i], aCard)) {
 				if (winningIndex == -1) {
 					winningIndex = i;

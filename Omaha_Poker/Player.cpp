@@ -3,7 +3,7 @@
 Player::Player() : playerHand() { 
 }
 
-void Player::setPlayerName( string& name) { 
+void Player::setPlayerName(const string& name) { 
     playerName = name;
 }
 
@@ -11,12 +11,10 @@ Card* Player::getPlayerHand() {
 
     return playerHand;
 }
- 
-void Player::setPlayerHandPosition(Card* newCard, int index)
+
+void Player::setPlayerHandPosition(Card newCard, int index)
 {
-    if (index >= 0 && index < NUM_CARDS_PLAYER) {
-        playerHand[index] = *newCard;
-    }
+    playerHand[index]=newCard;
 }
 
 string Player::getPlayerName() {
