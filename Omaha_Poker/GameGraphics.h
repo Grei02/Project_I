@@ -6,9 +6,13 @@
 
 using namespace std;
 using namespace sf;
-
+const int MAX_PLAYERS = 6;
 class GameGraphics {
 private:
+
+    Player* players[MAX_PLAYERS];
+    int numPlayers;
+    const int  NUM_CARDS_PLAYER = 4;
     Dealer dealer;
     Player player;
     RenderWindow window;
@@ -37,6 +41,8 @@ private:
     void loadAndSetInstructionsTexture( string filename);
     void loadAndSetGameBackgroundTexture(string filename);
     void showErrorMessage(string message);
+    void drawPlayerCards(Player** players, int numPlayers,Vector2f* playerPositions, int numPositions);
+    void generatePlayerPositions(Vector2f* positions, int numPlayers);
     void setupUI();
     void handleTextInput(Uint32 unicode);
     void handleKeyPress(sf::Keyboard::Key key);

@@ -15,16 +15,15 @@ void GameGraphics::run() {
 		}
 	}
 
-    while (window.isOpen()) {
-        handleEvents();
-        render();
+	while (window.isOpen()) {
+		handleEvents();
+		render();
 
-        if (numPlayersEntered && instructionsLoaded) {
-            loadAndSetGameBackgroundTexture("images/gameBackground.png");
-
-            instructionsScreen = false;
-        }
-    }
+		if (numPlayersEntered && instructionsLoaded) {
+			loadAndSetGameBackgroundTexture("images/gameBackground.png");
+			instructionsScreen = false;
+		}
+	}
 }
 
 void GameGraphics::handleEvents() {
@@ -113,13 +112,13 @@ void GameGraphics::handleKeyPress(sf::Keyboard::Key key) {
 		}
 	}
 	else if (key == sf::Keyboard::Enter) {
-		int numPlayers = std::stoi(inputText.getString().toAnsiString());
+		numPlayers = std::stoi(inputText.getString().toAnsiString());
 		if (numPlayers >= 2 && numPlayers <= 6) {
 			dealer.setNumPlayers(numPlayers);
 			cout << "Comenzando juego con " << dealer.getNumPlayers() << " jugadores." << std::endl;
 			numPlayersEntered = true;
 			instructionsScreen = false;
-			errorMessageActive = false; 
+			errorMessageActive = false;
 		}
 		else {
 			showErrorMessage("Por favor, ingrese un número de jugadores válido (entre 2 y 6).");
@@ -176,25 +175,67 @@ void GameGraphics::showErrorMessage(string message) {
 	errorMessage.setFillColor(sf::Color::Red);
 	errorMessage.setPosition(100, 200);
 
-	//errorMessageActive = true;
+	errorMessageActive = true;
 
 	instructionsSprite.setTexture(instructionsTexture);
 	window.draw(instructionsSprite);
 	window.draw(errorMessage);
 	window.display();
-	errorMessageActive = true;
-
-    /*for (int i = 0; i < numPlayers; ++i) {
-        Card* playerHand = players[i]->getPlayerHand();
-        for (int j = 0; j < NUM_CARDS_PLAYER; ++j) {
-            const sf::Texture* texture = playerHand[j].getImage();
-            sf::Sprite cardSprite(*texture);
-            cardSprite.setPosition(100 + j * 120, 100 + i * 150);
-            window.draw(cardSprite);
-        }
-    }*/
 
 }
+
+void GameGraphics::drawPlayerCards(Player** players, int numPlayers,Vector2f* playerPositions, int numPositions) {
+	for (int i = 0; i < numPlayers; ++i) {
+		Card* playerHand = players[i]->getPlayerHand();
+
+		if (i < numPositions) {
+			Vector2f playerPosition = playerPositions[i];
+			for (int j = 0; j < NUM_CARDS_PLAYER; ++j) {
+				Card card = playerHand[j];
+				string cardFileName = "pictures/" + std::to_string(card.getSymbol()) + std::to_string(card.getValue()) + ".png";
+				Texture cardTexture;
+				if (cardTexture.loadFromFile(cardFileName)) {
+					Sprite cardSprite(cardTexture);
+
+					float cardX = playerPosition.x + j * 120;
+					float cardY = playerPosition.y;
+					cardSprite.setPosition(cardX, cardY);
+
+					window.draw(cardSprite); 
+				}
+				else {
+					cerr << "Error al cargar la textura de la carta: " << cardFileName << std::endl;
+				}
+			}
+		}
+		else {
+			cerr << "Error: No hay suficientes posiciones especificadas para todos los jugadores." << std::endl;
+			return;
+		}
+	}
+}
+void GameGraphics::generatePlayerPositions(Vector2f* positions, int numPlayers) {
+	const float startX = 100.0f; // Posición inicial en el eje x
+	const float startY = 100.0f; // Posición inicial en el eje y
+	const float spacingX = 200.0f; // Espaciado horizontal entre jugadores
+	const float spacingY = 100.0f; // Espaciado vertical entre jugadores
+	const int maxPlayersPerRow = 3; // Máximo de jugadores por fila
+
+	// Calcular el número de filas y columnas necesarias para acomodar a todos los jugadores
+	int numRows = (numPlayers + maxPlayersPerRow - 1) / maxPlayersPerRow;
+	int numColumns = std::min(numPlayers, maxPlayersPerRow);
+
+	// Calcular las posiciones de los jugadores
+	for (int i = 0; i < numPlayers; i++) {
+		int row = i / numColumns;
+		int col = i % numColumns;
+		float posX = startX + col * spacingX;
+		float posY = startY + row * spacingY;
+		positions[i] = Vector2f(posX, posY);
+	}
+}
+
+
 
 void GameGraphics::render() {
 	window.clear();
@@ -213,6 +254,9 @@ void GameGraphics::render() {
 	else {
 		if (numPlayersEntered && instructionsLoaded) {
 			window.draw(gameBackgroundSprite);
+			Vector2f playerPositions[MAX_PLAYERS];
+			generatePlayerPositions(playerPositions, numPlayers);
+			drawPlayerCards(players, numPlayers, playerPositions, numPlayers);
 		}
 		else {
 			window.draw(startScreenSprite);
