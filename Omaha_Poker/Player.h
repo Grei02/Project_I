@@ -5,18 +5,18 @@ using namespace std;
 
 class Player {
 private:
+    const int  NUM_CARDS_PLAYER = 4;
     Card* playerHand;
     string playerName;
 public:
     Player();
     ~Player();
 
-    void setPlayerName(const string& name); 
+    void setPlayerName(string& name); 
     string getPlayerName();
-   // Hand * getPlayerHand();
     Card* getPlayerHand();
 
-    void setPlayerHandPosition(Card newCard,int index);
+    void setPlayerHandPosition(Card* newCard, int index);
 
 };
 
