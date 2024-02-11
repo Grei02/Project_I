@@ -23,7 +23,7 @@ public:
     Dealer();
     ~Dealer();
 
-    void requestNumPlayers();
+    void setNumPlayers(int number);
     void dealCards();
 
     Card** getPlayerHands();

@@ -7,8 +7,8 @@ void Dealer::swapCards(Card& card1, Card& card2)
 	card2 = temp;
 }
 
-Dealer::Dealer() :numPlayers(0) {
-	requestNumPlayers();
+Dealer::Dealer()
+{
 }
 
 Dealer::~Dealer()
@@ -29,18 +29,13 @@ Card** Dealer::getPlayerHands()
 	return playerHands;
 }
 
-void Dealer::requestNumPlayers()
-{
-	do {
-		cout << "Enter the number of players (between 2 and 6): ";
-		cin >> numPlayers;
-	} while (numPlayers < MIN_PLAYERS || numPlayers > MAX_PlAYERS);
+void Dealer::setNumPlayers(int number) {
+	numPlayers = number;
 
 	for (int i = 0; i < numPlayers; i++) {
 		players[i] = new Player();
 	}
 }
-
 void Dealer::dealCards()
 {
 	for (int i = 0; i < numPlayers; i++) {
