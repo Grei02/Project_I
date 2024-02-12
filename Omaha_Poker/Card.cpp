@@ -9,7 +9,7 @@ Card::Card(int _value, char _symbol)
 	symbol = _symbol;
 	direction = folder + _symbol + to_string(_value) + format;
 	if (!image.loadFromFile(direction)) {
-		cerr<<"error al cargar"<<direction<<endl;
+		cerr<<"error al cargar la dirreccion"<<endl;
 	}
 	spriteImage.setTexture(image);
 }

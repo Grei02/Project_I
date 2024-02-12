@@ -3,11 +3,11 @@
 
 int main() {
 GameGraphics game;
-	/*Board board;
+	Board board;
 	board.startGame();
 	board.displayPlayerHands();
 	board.displayCommunityCards();
-	board.evaluateHands();*/
+	board.evaluateHands();
 game.run();
 	return 0;
 }

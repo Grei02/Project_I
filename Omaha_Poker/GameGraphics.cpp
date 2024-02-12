@@ -2,6 +2,8 @@
 
 GameGraphics::GameGraphics() : window(VideoMode(1200, 650), "Omaha Poker") {
 	setupStartScreen();
+	initializePlayerPositions();
+	initializeCircleInfo();
 }
 
 void GameGraphics::run() {
@@ -12,16 +14,7 @@ void GameGraphics::run() {
 		if (numPlayersEntered && instructionsLoaded) {
 			loadAndSetGameBackgroundTexture("images/gameBackground.png");
 			instructionsScreen = false;
-		}
-	}
-
-	while (window.isOpen()) {
-		handleEvents();
-		render();
-
-		if (numPlayersEntered && instructionsLoaded) {
-			loadAndSetGameBackgroundTexture("images/gameBackground.png");
-			instructionsScreen = false;
+			drawCircles = true;
 		}
 	}
 }
@@ -29,12 +22,18 @@ void GameGraphics::run() {
 void GameGraphics::handleEvents() {
 	Event event;
 	while (window.pollEvent(event)) {
+		
 		if (event.type == Event::Closed) {
 			window.close();
 		}
 		else if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
 			if (instructionsScreen)
 				handleMouseEvents(event);
+			// Obtener la posición del ratón
+			Vector2i mousePosition = Mouse::getPosition(window);
+
+			// Imprimir las coordenadas x y y
+			std::cout << "Posición del ratón - x: " << mousePosition.x << ", y: " << mousePosition.y << std::endl;
 		}
 		else if (event.type == Event::TextEntered) {
 			if (instructionsScreen)
@@ -49,13 +48,15 @@ void GameGraphics::handleEvents() {
 
 void GameGraphics::handleMouseEvents(Event event) {
 	if (instructionsScreen) {
+		
 		handleInstructionsLogic();
 	}
 }
 
 void GameGraphics::handleInstructionsLogic() {
-	Vector2i mousePosition = Mouse::getPosition(window);
 
+	Vector2i mousePosition = Mouse::getPosition(window);
+	cout << "Posición del ratón - x: " << mousePosition.x << ", y: " << mousePosition.y << std::endl;
 	if (!instructionsLoaded && isInsideSpecificArea(mousePosition)) {
 		loadAndSetInstructionsTexture("images/instructions.png");
 	}
@@ -98,7 +99,7 @@ void GameGraphics::setupUI() {
 }
 
 void GameGraphics::handleTextInput(sf::Uint32 unicode) {
-	if (unicode >= '2' && unicode <= '6' && inputText.getString().getSize() < 2) {
+	if (unicode >= '2' && unicode <= '6' && inputText.getString().getSize() < 1) {
 		inputText.setString(inputText.getString() + static_cast<char>(unicode));
 	}
 }
@@ -112,17 +113,14 @@ void GameGraphics::handleKeyPress(sf::Keyboard::Key key) {
 		}
 	}
 	else if (key == sf::Keyboard::Enter) {
-		numPlayers = std::stoi(inputText.getString().toAnsiString());
+		int numPlayers = stoi(inputText.getString().toAnsiString());
 		if (numPlayers >= 2 && numPlayers <= 6) {
 			dealer.setNumPlayers(numPlayers);
 			cout << "Comenzando juego con " << dealer.getNumPlayers() << " jugadores." << std::endl;
 			numPlayersEntered = true;
 			instructionsScreen = false;
-			errorMessageActive = false;
 		}
-		else {
-			showErrorMessage("Por favor, ingrese un número de jugadores válido (entre 2 y 6).");
-		}
+	
 	}
 }
 
@@ -136,8 +134,7 @@ bool GameGraphics::isInsideSpecificArea(Vector2i mousePosition) {
 	return specificArea.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 }
 
-void GameGraphics::loadAndSetInstructionsTexture(string
-	filename) {
+void GameGraphics::loadAndSetInstructionsTexture(string filename) {
 	Texture newTexture;
 	if (newTexture.loadFromFile(filename)) {
 		instructionsTexture = newTexture;
@@ -147,6 +144,40 @@ void GameGraphics::loadAndSetInstructionsTexture(string
 	}
 	else {
 		cerr << "Error al cargar la textura de las instrucciones desde el archivo: " << filename << endl;
+	}
+}
+
+void GameGraphics::initializePlayerPositions() {
+	
+	playerPositions[0] = sf::Vector2f(794, 114);  // Dealer
+	playerPositions[1] = sf::Vector2f(995, 355);  // Small Blind
+	playerPositions[2] = sf::Vector2f(238, 143);  // Big Blind
+	
+}
+
+void GameGraphics::drawPlayerCircles() {
+	if (numPlayersEntered && instructionsLoaded) {
+		for (int i = 0; i < 3; ++i) {
+			sf::CircleShape circle(circleRadius);
+			circle.setFillColor(playerColors[i]);
+			circle.setPosition(playerPositions[i]);
+			window.draw(circle);
+
+			Font font;
+			if (!font.loadFromFile("fonts/TiltNeon-Regular.ttf")) {
+				std::cerr << "Error al cargar la fuente." << std::endl;
+				return;
+			}
+
+			Text text;
+			text.setFont(font);
+			text.setString(playerNames[i]);
+			text.setCharacterSize(9);
+			text.setFillColor(Color::Black);
+			text.setPosition(playerPositions[i].x, playerPositions[i].y+10);
+
+			window.draw(text); 
+		}
 	}
 }
 
@@ -160,82 +191,12 @@ void GameGraphics::loadAndSetGameBackgroundTexture(string filename) {
 		cerr << "Error al cargar la textura del fondo del juego." << endl;
 	}
 }
-
-void GameGraphics::showErrorMessage(string message) {
-	Font font;
-	if (!font.loadFromFile("fonts/Foldit-VariableFont_wght.ttf")) {
-		cerr << "Error al cargar la fuente." << endl;
-		return;
-	}
-
-	Text errorMessage;
-	errorMessage.setFont(font);
-	errorMessage.setString(message);
-	errorMessage.setCharacterSize(60);
-	errorMessage.setFillColor(sf::Color::Red);
-	errorMessage.setPosition(100, 200);
-
-	errorMessageActive = true;
-
-	instructionsSprite.setTexture(instructionsTexture);
-	window.draw(instructionsSprite);
-	window.draw(errorMessage);
-	window.display();
-
+void GameGraphics::initializeCircleInfo() {
+	circleRadius = 20.0f;
+	playerColors[0] = sf::Color::Red;
+	playerColors[1] = sf::Color::Green;
+	playerColors[2] = sf::Color::Blue;
 }
-
-void GameGraphics::drawPlayerCards(Player** players, int numPlayers,Vector2f* playerPositions, int numPositions) {
-	for (int i = 0; i < numPlayers; ++i) {
-		Card* playerHand = players[i]->getPlayerHand();
-
-		if (i < numPositions) {
-			Vector2f playerPosition = playerPositions[i];
-			for (int j = 0; j < NUM_CARDS_PLAYER; ++j) {
-				Card card = playerHand[j];
-				string cardFileName = "pictures/" + std::to_string(card.getSymbol()) + std::to_string(card.getValue()) + ".png";
-				Texture cardTexture;
-				if (cardTexture.loadFromFile(cardFileName)) {
-					Sprite cardSprite(cardTexture);
-
-					float cardX = playerPosition.x + j * 120;
-					float cardY = playerPosition.y;
-					cardSprite.setPosition(cardX, cardY);
-
-					window.draw(cardSprite); 
-				}
-				else {
-					cerr << "Error al cargar la textura de la carta: " << cardFileName << std::endl;
-				}
-			}
-		}
-		else {
-			cerr << "Error: No hay suficientes posiciones especificadas para todos los jugadores." << std::endl;
-			return;
-		}
-	}
-}
-void GameGraphics::generatePlayerPositions(Vector2f* positions, int numPlayers) {
-	const float startX = 100.0f; // Posición inicial en el eje x
-	const float startY = 100.0f; // Posición inicial en el eje y
-	const float spacingX = 200.0f; // Espaciado horizontal entre jugadores
-	const float spacingY = 100.0f; // Espaciado vertical entre jugadores
-	const int maxPlayersPerRow = 3; // Máximo de jugadores por fila
-
-	// Calcular el número de filas y columnas necesarias para acomodar a todos los jugadores
-	int numRows = (numPlayers + maxPlayersPerRow - 1) / maxPlayersPerRow;
-	int numColumns = std::min(numPlayers, maxPlayersPerRow);
-
-	// Calcular las posiciones de los jugadores
-	for (int i = 0; i < numPlayers; i++) {
-		int row = i / numColumns;
-		int col = i % numColumns;
-		float posX = startX + col * spacingX;
-		float posY = startY + row * spacingY;
-		positions[i] = Vector2f(posX, posY);
-	}
-}
-
-
 
 void GameGraphics::render() {
 	window.clear();
@@ -254,18 +215,16 @@ void GameGraphics::render() {
 	else {
 		if (numPlayersEntered && instructionsLoaded) {
 			window.draw(gameBackgroundSprite);
-			Vector2f playerPositions[MAX_PLAYERS];
-			generatePlayerPositions(playerPositions, numPlayers);
-			drawPlayerCards(players, numPlayers, playerPositions, numPlayers);
 		}
 		else {
 			window.draw(startScreenSprite);
 		}
 	}
 
-	if (errorMessageActive) {
-		window.draw(errorMessage);
+	if (drawCircles) {
+		
+		drawPlayerCircles();
 	}
-
 	window.display();
 }
+
