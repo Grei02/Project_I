@@ -20,10 +20,7 @@ bool FourOfAKind::IsTheOriginCorrect(Card* handFormed, Card* communityCards, Car
         }
     }
 
-    if (playerCardsInTheHand == 2 && communityCardsInTheHand == 2) {
-        return true;
-    }
-    return false;
+    return (playerCardsInTheHand == 2 && communityCardsInTheHand == 2);
 }
 
 void FourOfAKind::swap(Card& card1, Card& card2)
@@ -74,8 +71,5 @@ bool FourOfAKind::evaluate(Card* communityCards, Card* playerCards)
         }
     }
 
-    if (IsTheOriginCorrect(handFormed, communityCards, playerCards)) {
-        return false;
-    }
-    return true;
+    return (IsTheOriginCorrect(handFormed, communityCards, playerCards));
 }

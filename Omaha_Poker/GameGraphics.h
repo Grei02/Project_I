@@ -33,6 +33,7 @@ private:
     string playerNames[3] = { "Dealer", "Small Blind", "Big Blind" };
     Vector2f playerPositions[3];
 
+    
     void handleEvents();
     void handleMouseEvents(Event event);
     void handleInstructionsLogic();
@@ -42,6 +43,7 @@ private:
     bool isInsideSpecificArea(Vector2i mousePosition);
     void initializePlayerPositions();
     void initializeCircleInfo();
+    void drawPlayerCards();
     void render();
 
 public:

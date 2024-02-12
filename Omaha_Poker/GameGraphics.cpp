@@ -22,26 +22,35 @@ void GameGraphics::run() {
 void GameGraphics::handleEvents() {
 	Event event;
 	while (window.pollEvent(event)) {
-		
 		if (event.type == Event::Closed) {
 			window.close();
+			continue;
 		}
-		else if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
-			if (instructionsScreen)
+
+		if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+			if (instructionsScreen) {
 				handleMouseEvents(event);
+			}
 			Vector2i mousePosition = Mouse::getPosition(window);
 			cout << "Posición del ratón - x: " << mousePosition.x << ", y: " << mousePosition.y << std::endl;
+			continue;
 		}
-		else if (event.type == Event::TextEntered) {
-			if (instructionsScreen)
+
+		if (event.type == Event::TextEntered) {
+			if (instructionsScreen) {
 				handleTextInput(event.text.unicode);
+			}
+			continue;
 		}
-		else if (event.type == Event::KeyPressed) {
-			if (instructionsScreen)
+
+		if (event.type == Event::KeyPressed) {
+			if (instructionsScreen) {
 				handleKeyPress(event.key.code);
+			}
 		}
 	}
 }
+
 
 void GameGraphics::handleMouseEvents(Event event) {
 	if (instructionsScreen) {
@@ -100,24 +109,31 @@ void GameGraphics::handleTextInput(sf::Uint32 unicode) {
 }
 
 void GameGraphics::handleKeyPress(sf::Keyboard::Key key) {
-	if (key == Keyboard::BackSpace) {
-		string inputStr = inputText.getString();
+	if (key == sf::Keyboard::BackSpace) {
+		std::string inputStr = inputText.getString();
 		if (!inputStr.empty()) {
 			inputStr.pop_back();
 			inputText.setString(inputStr);
 		}
 	}
-	else if (key == sf::Keyboard::Enter) {
+
+	if (key == sf::Keyboard::Enter) {
 		int numPlayers = stoi(inputText.getString().toAnsiString());
 		if (numPlayers >= 2 && numPlayers <= 6) {
+<<<<<<< HEAD
 			board.setNumPlayers(numPlayers);
 			cout << "Comenzando juego con " << numPlayers << " jugadores." << std::endl;
+=======
+			dealer.setNumPlayers(numPlayers);
+			cout << numPlayers << endl;
+			cout << "Comenzando juego con " << dealer.getNumPlayers() << " jugadores." << std::endl;
+>>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b
 			numPlayersEntered = true;
 			instructionsScreen = false;
 		}
-	
 	}
 }
+
 
 bool GameGraphics::isInsideSpecificAreaInstruccions(Vector2i mousePosition) {
 	FloatRect specificArea(992, 580, 1172, 630);
@@ -132,7 +148,12 @@ bool GameGraphics::isInsideSpecificArea(Vector2i mousePosition) {
 void GameGraphics::loadAndSetInstructionsTexture(string filename) {
 	Texture newTexture;
 	if (!newTexture.loadFromFile(filename)) {
+<<<<<<< HEAD
 		throw runtime_error("Error al cargar la textura : ");
+=======
+		cerr << "Error al cargar la textura de las instrucciones desde el archivo: " << filename << endl;
+		return;
+>>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b
 	}
 	instructionsTexture = newTexture;
 	instructionsSprite.setTexture(instructionsTexture);
@@ -213,6 +234,33 @@ void GameGraphics::drawPlayerCards() {
 	}
 }
 
+void GameGraphics::drawPlayerCards() {
+	dealer.dealCards();
+	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
+		string file = "Pictures/";
+		string format = ".png";
+		Card** playerCards = dealer.getPlayerHands();
+		for (int j = 0; j < 4; ++j) {
+			string cardFileName = file += playerCards[i][j].symbol + to_string(playerCards[i][j].value) += format;
+
+			sf::Texture cardTexture;
+			if (!cardTexture.loadFromFile(cardFileName)) {
+				cerr << "Error al cargar la textura de la carta: " << cardFileName << std::endl;
+				continue;
+			}
+
+			Sprite cardSprite;
+			cardSprite.setTexture(cardTexture);
+
+			cardSprite.setPosition(100 + j * 120, 200 + i * 200);
+			cardSprite.setScale(0.3f,0.3f);
+
+			window.draw(cardSprite);
+			
+		}
+	}
+}
+
 void GameGraphics::render() {
 	window.clear();
 
@@ -230,6 +278,11 @@ void GameGraphics::render() {
 	else {
 		if (numPlayersEntered && instructionsLoaded) {
 			window.draw(gameBackgroundSprite);
+<<<<<<< HEAD
+=======
+
+			
+>>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b
 			drawPlayerCards();
 		}
 		else {
@@ -243,3 +296,8 @@ void GameGraphics::render() {
 
 	window.display();
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b

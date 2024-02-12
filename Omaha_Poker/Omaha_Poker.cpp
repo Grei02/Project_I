@@ -6,6 +6,7 @@ GameGraphics game;
 Board board;
 
 int main() {
+<<<<<<< HEAD
 	try {
 		game.setupStartScreen();
 		game.loadAndSetInstructionsTexture("images/instructions.png");
@@ -28,5 +29,16 @@ int main() {
 	board.evaluateHands();
 
 return 0;
+=======
+    GameGraphics game;
+	Board board;
+    board.setNumPlayers(2); 
+    board.startGame();
+    board.displayPlayerHands();
+    board.displayCommunityCards();
+    board.evaluateHands();
+    game.run();
+	return 0;
+>>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b
 }
 

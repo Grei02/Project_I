@@ -19,10 +19,7 @@ bool FullHouse::IsTheOriginCorrect(Card* handFormed, Card* communityCards, Card*
             }
         }
     }
-    if (playerCardsInTheHand == 2 && communityCardsInTheHand == 3) {
-        return true;
-    }
-    return false;
+    return (playerCardsInTheHand == 2 && communityCardsInTheHand == 3);
 }
 
 void FullHouse::swap(Card& card1, Card& card2)
@@ -69,9 +66,6 @@ bool FullHouse::evaluate(Card* communityCards, Card* playerCards)
             index += 2;
         }
     }
-    if (IsTheOriginCorrect(handFormed, communityCards, playerCards)) {
-        return false;
-    }
-    return true;
+    return (IsTheOriginCorrect(handFormed, communityCards, playerCards));
 
 }
