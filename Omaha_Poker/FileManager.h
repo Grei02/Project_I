@@ -1,6 +1,8 @@
 #pragma once
 #include "Card.h"
 #include <fstream>
+#include <string>
+using namespace std;
 class FileManager
 {
 private:

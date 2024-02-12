@@ -2,9 +2,9 @@
 
 Hand::Hand()
 {
-    for (int i = 0; i < maxHandCards; i++) {
+    /*for (int i = 0; i < maxHandCards; i++) {
         playerHand[i] = new Card();
-    }
+    }*/
 }
 
 Hand::~Hand()

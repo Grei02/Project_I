@@ -8,14 +8,16 @@ void Board::startGame()
 void Board::displayPlayerHands() {
 	Card** playerCards = dealer.getPlayerHands();
 
-	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
+	for (int i = 0; i < dealer.getNumPlayers(); i++) {
 		cout << dealer.getPlayers()[i]->getPlayerName() << "'s cards: ";
 		for (int j = 0; j < 4; ++j) {
-			cout << playerCards[i]->value << playerCards[i]->symbol << " ";
+			cout << playerCards[i][j].value << playerCards[i][j].symbol << " ";
+
 		}
 		cout << endl;
 	}
 }
+
 
 void Board::displayCommunityCards() {
 	Card** flop = dealer.getFlop();

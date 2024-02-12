@@ -29,11 +29,8 @@ void GameGraphics::handleEvents() {
 		else if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
 			if (instructionsScreen)
 				handleMouseEvents(event);
-			// Obtener la posición del ratón
 			Vector2i mousePosition = Mouse::getPosition(window);
-
-			// Imprimir las coordenadas x y y
-			std::cout << "Posición del ratón - x: " << mousePosition.x << ", y: " << mousePosition.y << std::endl;
+			cout << "Posición del ratón - x: " << mousePosition.x << ", y: " << mousePosition.y << std::endl;
 		}
 		else if (event.type == Event::TextEntered) {
 			if (instructionsScreen)
