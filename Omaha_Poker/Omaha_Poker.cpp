@@ -3,14 +3,14 @@
 #include "GameGraphics.h"
 
 int main() {
-    //GameGraphics game;
+    GameGraphics game;
 	Board board;
     board.setNumPlayers(2); 
     board.startGame();
     board.displayPlayerHands();
     board.displayCommunityCards();
     board.evaluateHands();
-   //game.run();
+    game.run();
 	return 0;
 }
 

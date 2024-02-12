@@ -19,10 +19,7 @@ bool StraightFlush::IsTheOriginCorrect(Card* handFormed, Card* communityCards, C
             }
         }
     }
-    if (playerCardsInTheHand == 2 && communityCardsInTheHand == 3) {
-        return true;
-    }
-    return false;
+    return (playerCardsInTheHand == 2 && communityCardsInTheHand == 3);
 }
 
 void StraightFlush::swap(Card& card1, Card& card2)
@@ -81,8 +78,5 @@ bool StraightFlush::evaluate(Card* communityCards, Card* playerCards)
         }
     }
 
-    if (!IsTheOriginCorrect(handFormed, communityCards, playerCards)) {
-        return false;
-    }
-    return true;
+    return (IsTheOriginCorrect(handFormed, communityCards, playerCards));
 }

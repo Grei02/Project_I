@@ -30,6 +30,7 @@ private:
     string playerNames[3] = { "Dealer", "Small Blind", "Big Blind" };
     Vector2f playerPositions[3];
 
+    
     void handleEvents();
     void handleMouseEvents(Event event);
     void handleInstructionsLogic();
@@ -44,6 +45,7 @@ private:
     void drawPlayerCircles();
     void loadAndSetGameBackgroundTexture(string filename);
     void initializeCircleInfo();
+    void drawPlayerCards();
     void render();
 
 public:
