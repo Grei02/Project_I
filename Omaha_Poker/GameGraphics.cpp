@@ -65,16 +65,14 @@ void GameGraphics::handleInstructionsLogic() {
 
 void GameGraphics::setupStartScreen() {
 	if (!startScreenTexture.loadFromFile("images/inicio.png")) {
-		cerr << "Error al cargar la textura de la pantalla de inicio." << endl;
+		throw runtime_error("Error al cargar la textura : ");
 	}
-
 	startScreenSprite.setTexture(startScreenTexture);
 }
 
 void GameGraphics::setupUI() {
 	if (!font.loadFromFile("fonts/Foldit-VariableFont_wght.ttf")) {
-		cerr << "Error al cargar la fuente." << endl;
-		return;
+		throw exception("Error al cargar la fuente");
 	}
 
 	text.setFont(font);
@@ -112,8 +110,8 @@ void GameGraphics::handleKeyPress(sf::Keyboard::Key key) {
 	else if (key == sf::Keyboard::Enter) {
 		int numPlayers = stoi(inputText.getString().toAnsiString());
 		if (numPlayers >= 2 && numPlayers <= 6) {
-			dealer.setNumPlayers(numPlayers);
-			cout << "Comenzando juego con " << dealer.getNumPlayers() << " jugadores." << std::endl;
+			board.setNumPlayers(numPlayers);
+			cout << "Comenzando juego con " << numPlayers << " jugadores." << std::endl;
 			numPlayersEntered = true;
 			instructionsScreen = false;
 		}
@@ -133,15 +131,13 @@ bool GameGraphics::isInsideSpecificArea(Vector2i mousePosition) {
 
 void GameGraphics::loadAndSetInstructionsTexture(string filename) {
 	Texture newTexture;
-	if (newTexture.loadFromFile(filename)) {
-		instructionsTexture = newTexture;
-		instructionsSprite.setTexture(instructionsTexture);
-		setupUI();
-		instructionsLoaded = true;
+	if (!newTexture.loadFromFile(filename)) {
+		throw runtime_error("Error al cargar la textura : ");
 	}
-	else {
-		cerr << "Error al cargar la textura de las instrucciones desde el archivo: " << filename << endl;
-	}
+	instructionsTexture = newTexture;
+	instructionsSprite.setTexture(instructionsTexture);
+	setupUI();
+	instructionsLoaded = true;
 }
 
 void GameGraphics::initializePlayerPositions() {
@@ -162,8 +158,7 @@ void GameGraphics::drawPlayerCircles() {
 
 			Font font;
 			if (!font.loadFromFile("fonts/TiltNeon-Regular.ttf")) {
-				std::cerr << "Error al cargar la fuente." << std::endl;
-				return;
+				throw exception("Error al cargar la fuente");
 			}
 
 			Text text;
@@ -180,19 +175,42 @@ void GameGraphics::drawPlayerCircles() {
 
 void GameGraphics::loadAndSetGameBackgroundTexture(string filename) {
 	Texture newTexture;
-	if (newTexture.loadFromFile(filename)) {
-		gameBackgroundTexture = newTexture;
-		gameBackgroundSprite.setTexture(gameBackgroundTexture);
+	if (!newTexture.loadFromFile(filename)) {
+		throw runtime_error("Error al cargar la textura : ");
 	}
-	else {
-		cerr << "Error al cargar la textura del fondo del juego." << endl;
-	}
+	
+	gameBackgroundTexture = newTexture;
+	gameBackgroundSprite.setTexture(gameBackgroundTexture);
 }
 void GameGraphics::initializeCircleInfo() {
 	circleRadius = 20.0f;
 	playerColors[0] = sf::Color::Red;
 	playerColors[1] = sf::Color::Green;
 	playerColors[2] = sf::Color::Blue;
+}
+void GameGraphics::drawPlayerCards() {
+
+	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
+		string file = "Pictures/";
+		string format = ".png";
+		Card** playerCards = dealer.getPlayerHands();
+		for (int j = 0; j < 4; ++j) {
+		  string cardFileName = file + to_string(playerCards[i][j].value) + playerCards[i][j].symbol + format;
+
+			Texture cardTexture;
+			if (!cardTexture.loadFromFile(cardFileName)) {
+				throw runtime_error("Error al cargar la textura : ");
+				
+			}
+
+			Sprite cardSprite;
+			cardSprite.setTexture(cardTexture);
+
+			cardSprite.setPosition(100 + j * 120, 200 + i * 200);
+
+			window.draw(cardSprite);
+		}
+	}
 }
 
 void GameGraphics::render() {
@@ -212,6 +230,7 @@ void GameGraphics::render() {
 	else {
 		if (numPlayersEntered && instructionsLoaded) {
 			window.draw(gameBackgroundSprite);
+			drawPlayerCards();
 		}
 		else {
 			window.draw(startScreenSprite);
@@ -219,9 +238,8 @@ void GameGraphics::render() {
 	}
 
 	if (drawCircles) {
-		
 		drawPlayerCircles();
 	}
+
 	window.display();
 }
-

@@ -1,8 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <stdexcept>
 #include <iostream>
 #include "Dealer.h"
 #include "Player.h"
+#include "Board.h"
 
 using namespace std;
 using namespace sf;
@@ -10,6 +12,7 @@ using namespace sf;
 class GameGraphics {
 private:
     Dealer dealer;
+    Board board;
     RenderWindow window;
     Sprite startScreenSprite;
     Texture startScreenTexture;
@@ -33,20 +36,21 @@ private:
     void handleEvents();
     void handleMouseEvents(Event event);
     void handleInstructionsLogic();
-    void setupStartScreen();
-    void setupUI();
     void handleTextInput(Uint32 unicode);
     void handleKeyPress(Keyboard::Key key);
     bool isInsideSpecificAreaInstruccions(Vector2i mousePosition);
     bool isInsideSpecificArea(Vector2i mousePosition);
-    void loadAndSetInstructionsTexture(string filename);
     void initializePlayerPositions();
-    void drawPlayerCircles();
-    void loadAndSetGameBackgroundTexture(string filename);
     void initializeCircleInfo();
     void render();
 
 public:
+    void setupStartScreen();
+    void loadAndSetInstructionsTexture(string filename);
+    void loadAndSetGameBackgroundTexture(string filename);
+    void drawPlayerCards();
+    void drawPlayerCircles();
+    void setupUI();
     GameGraphics();
     void run();
 };

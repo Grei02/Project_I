@@ -7,6 +7,7 @@ void Board::startGame()
 void Board::setNumPlayers(int number) {
 	dealer.setNumPlayers(number);
 }
+
 void Board::displayPlayerHands() {
 	Card** playerCards = dealer.getPlayerHands();
 
