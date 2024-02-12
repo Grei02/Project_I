@@ -6,7 +6,13 @@ GameGraphics game;
 Board board;
 
 int main() {
-<<<<<<< HEAD
+
+	game.run();
+	board.startGame();
+	board.displayPlayerHands();
+	board.displayCommunityCards();
+	board.evaluateHands();
+
 	try {
 		game.setupStartScreen();
 		game.loadAndSetInstructionsTexture("images/instructions.png");
@@ -22,23 +28,8 @@ int main() {
 	catch(const exception& e){
 		cerr << "Error en la caraga de la fuente. " << e.what() << endl;
 	}
-	game.run();
-	board.startGame();
-	board.displayPlayerHands();
-	board.displayCommunityCards();
-	board.evaluateHands();
+	
 
-return 0;
-=======
-    GameGraphics game;
-	Board board;
-    board.setNumPlayers(2); 
-    board.startGame();
-    board.displayPlayerHands();
-    board.displayCommunityCards();
-    board.evaluateHands();
-    game.run();
 	return 0;
->>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b
 }
 

@@ -74,14 +74,15 @@ void GameGraphics::handleInstructionsLogic() {
 
 void GameGraphics::setupStartScreen() {
 	if (!startScreenTexture.loadFromFile("images/inicio.png")) {
-		throw runtime_error("Error al cargar la textura : ");
+		cerr << "Error al cargar la textura de la pantalla de inicio." << endl;
 	}
 	startScreenSprite.setTexture(startScreenTexture);
 }
 
 void GameGraphics::setupUI() {
 	if (!font.loadFromFile("fonts/Foldit-VariableFont_wght.ttf")) {
-		throw exception("Error al cargar la fuente");
+		cerr << "Error al cargar la fuente." << endl;
+		return;
 	}
 
 	text.setFont(font);
@@ -120,20 +121,14 @@ void GameGraphics::handleKeyPress(sf::Keyboard::Key key) {
 	if (key == sf::Keyboard::Enter) {
 		int numPlayers = stoi(inputText.getString().toAnsiString());
 		if (numPlayers >= 2 && numPlayers <= 6) {
-<<<<<<< HEAD
-			board.setNumPlayers(numPlayers);
-			cout << "Comenzando juego con " << numPlayers << " jugadores." << std::endl;
-=======
 			dealer.setNumPlayers(numPlayers);
 			cout << numPlayers << endl;
 			cout << "Comenzando juego con " << dealer.getNumPlayers() << " jugadores." << std::endl;
->>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b
 			numPlayersEntered = true;
 			instructionsScreen = false;
 		}
 	}
 }
-
 
 bool GameGraphics::isInsideSpecificAreaInstruccions(Vector2i mousePosition) {
 	FloatRect specificArea(992, 580, 1172, 630);
@@ -148,12 +143,8 @@ bool GameGraphics::isInsideSpecificArea(Vector2i mousePosition) {
 void GameGraphics::loadAndSetInstructionsTexture(string filename) {
 	Texture newTexture;
 	if (!newTexture.loadFromFile(filename)) {
-<<<<<<< HEAD
-		throw runtime_error("Error al cargar la textura : ");
-=======
 		cerr << "Error al cargar la textura de las instrucciones desde el archivo: " << filename << endl;
 		return;
->>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b
 	}
 	instructionsTexture = newTexture;
 	instructionsSprite.setTexture(instructionsTexture);
@@ -162,13 +153,12 @@ void GameGraphics::loadAndSetInstructionsTexture(string filename) {
 }
 
 void GameGraphics::initializePlayerPositions() {
-	
+
 	playerPositions[0] = sf::Vector2f(794, 114);  // Dealer
 	playerPositions[1] = sf::Vector2f(995, 355);  // Small Blind
 	playerPositions[2] = sf::Vector2f(238, 143);  // Big Blind
-	
-}
 
+}
 void GameGraphics::drawPlayerCircles() {
 	if (numPlayersEntered && instructionsLoaded) {
 		for (int i = 0; i < 3; ++i) {
@@ -179,7 +169,8 @@ void GameGraphics::drawPlayerCircles() {
 
 			Font font;
 			if (!font.loadFromFile("fonts/TiltNeon-Regular.ttf")) {
-				throw exception("Error al cargar la fuente");
+				std::cerr << "Error al cargar la fuente." << std::endl;
+				return;
 			}
 
 			Text text;
@@ -196,42 +187,19 @@ void GameGraphics::drawPlayerCircles() {
 
 void GameGraphics::loadAndSetGameBackgroundTexture(string filename) {
 	Texture newTexture;
-	if (!newTexture.loadFromFile(filename)) {
-		throw runtime_error("Error al cargar la textura : ");
+	if (newTexture.loadFromFile(filename)) {
+		gameBackgroundTexture = newTexture;
+		gameBackgroundSprite.setTexture(gameBackgroundTexture);
 	}
-	
-	gameBackgroundTexture = newTexture;
-	gameBackgroundSprite.setTexture(gameBackgroundTexture);
+	else {
+		cerr << "Error al cargar la textura del fondo del juego." << endl;
+	}
 }
 void GameGraphics::initializeCircleInfo() {
 	circleRadius = 20.0f;
 	playerColors[0] = sf::Color::Red;
 	playerColors[1] = sf::Color::Green;
 	playerColors[2] = sf::Color::Blue;
-}
-void GameGraphics::drawPlayerCards() {
-
-	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
-		string file = "Pictures/";
-		string format = ".png";
-		Card** playerCards = dealer.getPlayerHands();
-		for (int j = 0; j < 4; ++j) {
-		  string cardFileName = file + to_string(playerCards[i][j].value) + playerCards[i][j].symbol + format;
-
-			Texture cardTexture;
-			if (!cardTexture.loadFromFile(cardFileName)) {
-				throw runtime_error("Error al cargar la textura : ");
-				
-			}
-
-			Sprite cardSprite;
-			cardSprite.setTexture(cardTexture);
-
-			cardSprite.setPosition(100 + j * 120, 200 + i * 200);
-
-			window.draw(cardSprite);
-		}
-	}
 }
 
 void GameGraphics::drawPlayerCards() {
@@ -241,22 +209,20 @@ void GameGraphics::drawPlayerCards() {
 		string format = ".png";
 		Card** playerCards = dealer.getPlayerHands();
 		for (int j = 0; j < 4; ++j) {
-			string cardFileName = file += playerCards[i][j].symbol + to_string(playerCards[i][j].value) += format;
+			string cardFileName = file + playerCards[i][j].symbol + to_string(playerCards[i][j].value) + format;
 
 			sf::Texture cardTexture;
 			if (!cardTexture.loadFromFile(cardFileName)) {
 				cerr << "Error al cargar la textura de la carta: " << cardFileName << std::endl;
 				continue;
 			}
-
 			Sprite cardSprite;
 			cardSprite.setTexture(cardTexture);
 
 			cardSprite.setPosition(100 + j * 120, 200 + i * 200);
 			cardSprite.setScale(0.3f,0.3f);
-
 			window.draw(cardSprite);
-			
+	
 		}
 	}
 }
@@ -264,40 +230,30 @@ void GameGraphics::drawPlayerCards() {
 void GameGraphics::render() {
 	window.clear();
 
-	if (instructionsScreen) {
-		if (instructionsLoaded) {
-			window.draw(instructionsSprite);
-			window.draw(text);
-			window.draw(inputBox);
-			window.draw(inputText);
-		}
-		else {
-			window.draw(startScreenSprite);
-		}
+	if (instructionsScreen && instructionsLoaded) {
+		window.draw(instructionsSprite);
+		window.draw(text);
+		window.draw(inputBox);
+		window.draw(inputText);
 	}
-	else {
-		if (numPlayersEntered && instructionsLoaded) {
-			window.draw(gameBackgroundSprite);
-<<<<<<< HEAD
-=======
 
-			
->>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b
-			drawPlayerCards();
-		}
-		else {
-			window.draw(startScreenSprite);
-		}
+	if (instructionsScreen && !instructionsLoaded) {
+		window.draw(startScreenSprite);
+	}
+
+	if (!instructionsScreen && numPlayersEntered && instructionsLoaded) {
+		window.clear();
+		window.draw(gameBackgroundSprite);
+		drawPlayerCards();
 	}
 
 	if (drawCircles) {
 		drawPlayerCircles();
 	}
 
+	if (!instructionsScreen && !(numPlayersEntered && instructionsLoaded)) {
+		window.draw(startScreenSprite);
+	}
 	window.display();
+
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 444779eb1b65c6de5793ed84ff9a9ddef7577e3b

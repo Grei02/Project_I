@@ -5,10 +5,12 @@
 #include "Dealer.h"
 #include "Player.h"
 #include "Board.h"
+#include <cmath>
+#define M_PI 3.141592653
 
 using namespace std;
 using namespace sf;
-
+const int MAX_PLAYERS = 6;
 class GameGraphics {
 private:
     Dealer dealer;
@@ -28,10 +30,12 @@ private:
     bool instructionsLoaded = false;
     bool numPlayersEntered = false;
     bool drawCircles = false;
+    bool cardsDrawn = false;
     float circleRadius;
     Color playerColors[3] = { Color::Red,Color::Blue, Color::Green }; 
     string playerNames[3] = { "Dealer", "Small Blind", "Big Blind" };
     Vector2f playerPositions[3];
+    int numPlayers;
 
     
     void handleEvents();
@@ -41,14 +45,13 @@ private:
     void handleKeyPress(Keyboard::Key key);
     bool isInsideSpecificAreaInstruccions(Vector2i mousePosition);
     bool isInsideSpecificArea(Vector2i mousePosition);
-    void initializePlayerPositions();
     void initializeCircleInfo();
-    void drawPlayerCards();
     void render();
 
 public:
     void setupStartScreen();
     void loadAndSetInstructionsTexture(string filename);
+    void initializePlayerPositions();
     void loadAndSetGameBackgroundTexture(string filename);
     void drawPlayerCards();
     void drawPlayerCircles();
