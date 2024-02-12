@@ -7,8 +7,12 @@ void Dealer::swapCards(Card& card1, Card& card2)
 	card2 = temp;
 }
 
+
 Dealer::Dealer()
 {
+	for (int i = 0; i < MAX_PlAYERS; i++) {
+		players[i] = nullptr;
+	}
 }
 
 Dealer::~Dealer()
@@ -20,42 +24,37 @@ Dealer::~Dealer()
 
 Card** Dealer::getPlayerHands() {
    
-    if (numPlayers <= 0) {
-        
-        cerr << "Error: numPlayers no es válido." << endl;
-        return nullptr;
-    }
-    Card** playerHands = new Card * [numPlayers];
+	if (numPlayers <= 0) {
+		cerr << "Error: numPlayers no es válido." << endl;
+		return nullptr;
+	}
+	Card** playerHands = new Card * [numPlayers];
+	if (!playerHands) {
+		cerr << "Error: no se pudo asignar memoria para playerHands." << endl;
+		return nullptr;
+	}
 
-    if (!playerHands) {
-     
-        cerr << "Error: no se pudo asignar memoria para playerHands." << endl;
-        return nullptr;
-    }
+	for (int i = 0; i < numPlayers; i++) {
+		if (!players[i]) {
+			cerr << "Error: getPlayerHand() devolvió nullptr para el jugador " << i << "." << endl;
+			for (int j = 0; j < i; j++) {
+				delete[] playerHands[j];
+			}
+			delete[] playerHands;
+			return nullptr;
+		}
+		playerHands[i] = players[i]->getPlayerHand();
+	}
+	return playerHands;
 
-    for (int i = 0; i < numPlayers; i++) {
-        if (!players[i]) {
-            cerr << "Error: getPlayerHand() devolvió nullptr para el jugador " << i << "." << endl;
-           
-            for (int j = 0; j < i; j++) {
-                delete[] playerHands[j];
-            }
-            delete[] playerHands;
-            return nullptr;
-        }
-        playerHands[i] = players[i]->getPlayerHand();
-    }
-
-    return playerHands;
 }
-
 
 void Dealer::setNumPlayers(int number) {
 	numPlayers = number;
 
-	/*for (int i = 0; i < numPlayers; i++) {
+	for (int i = 0; i < numPlayers; i++) {
 		players[i] = new Player();
-	}*/
+	}
 }
 void Dealer::dealCards()
 {

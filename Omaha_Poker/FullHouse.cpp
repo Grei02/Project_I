@@ -53,7 +53,8 @@ bool FullHouse::evaluate(Card* communityCards, Card* playerCards)
         allCards[i + 5] = playerCards[i];
     }
     sortCards(allCards, 9);
-    Card* handFormed = nullptr;
+
+    Card handFormed[9]; 
     int index = 0;
     for (int i = 0; i < 9; i++) {
         if (allCards[i].value == allCards[i + 1].value && allCards[i + 1].value == allCards[i + 2].value) {
@@ -62,13 +63,12 @@ bool FullHouse::evaluate(Card* communityCards, Card* playerCards)
             handFormed[index + 2] = allCards[i + 2];
             index += 3;
         }
-        if (allCards[i].value == allCards[i + 1].value && allCards[i + 1].value != allCards[i + 2].value) {
+        else if (allCards[i].value == allCards[i + 1].value && allCards[i + 1].value != allCards[i + 2].value) {
             handFormed[index] = allCards[i];
             handFormed[index + 1] = allCards[i + 1];
             index += 2;
         }
     }
-
     if (IsTheOriginCorrect(handFormed, communityCards, playerCards)) {
         return false;
     }

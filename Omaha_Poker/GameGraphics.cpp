@@ -102,8 +102,8 @@ void GameGraphics::handleTextInput(sf::Uint32 unicode) {
 }
 
 void GameGraphics::handleKeyPress(sf::Keyboard::Key key) {
-	if (key == sf::Keyboard::BackSpace) {
-		std::string inputStr = inputText.getString();
+	if (key == Keyboard::BackSpace) {
+		string inputStr = inputText.getString();
 		if (!inputStr.empty()) {
 			inputStr.pop_back();
 			inputText.setString(inputStr);

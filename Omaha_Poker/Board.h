@@ -26,6 +26,7 @@ private:
 public:
     Card card;
     void startGame();
+    void setNumPlayers(int number);
     void displayPlayerHands();
     void displayCommunityCards();
     void evaluateHands();

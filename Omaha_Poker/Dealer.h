@@ -23,6 +23,8 @@ public:
     Dealer();
     ~Dealer();
 
+    Card** getPlayerHand(int playerIndex);
+
     void setNumPlayers(int number);
     void dealCards();
 

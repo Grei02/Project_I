@@ -6,7 +6,7 @@ public:
 	int value;
 	char symbol;
 	Card() {};
-	Card(int _value, char _symbol);
+	Card(int _value, char _symbol) : value(_value), symbol(_symbol) {};
 	int getValue();
 	char getSymbol();
 	~Card();

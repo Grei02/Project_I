@@ -2,11 +2,14 @@
 
 Hand::Hand()
 {
-    /*for (int i = 0; i < maxHandCards; i++) {
-        playerHand[i] = new Card();
-    }*/
+    for (int i = 0; i < maxHandCards; i++) {
+        playerHand[i] = nullptr;
+    }
 }
 
 Hand::~Hand()
 {
+    for (int i = 0; i < maxHandCards; i++) {
+        playerHand[i] = nullptr;
+    }
 }

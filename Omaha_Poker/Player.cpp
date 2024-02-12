@@ -1,6 +1,7 @@
 #include "Player.h"
 
-Player::Player() : playerHand() { 
+Player::Player() : playerHand() {
+    
 }
 
 void Player::setPlayerName(const string& name) { 
@@ -14,7 +15,7 @@ Card* Player::getPlayerHand() {
 
 void Player::setPlayerHandPosition(Card newCard, int index)
 {
-    playerHand[index]=newCard;
+    playerHand[index] = newCard;
 }
 
 string Player::getPlayerName() {
@@ -22,5 +23,4 @@ string Player::getPlayerName() {
 }
 
 Player::~Player() {
-    delete playerHand;
 }
