@@ -11,10 +11,12 @@
 using namespace std;
 using namespace sf;
 const int MAX_PLAYERS = 6;
+
 class GameGraphics {
 private:
     Dealer dealer;
     Board board;
+    Deck& deck;
     RenderWindow window;
     Sprite startScreenSprite;
     Texture startScreenTexture;
@@ -32,6 +34,9 @@ private:
     bool drawCircles = false;
     bool cardsDrawn = false;
     float circleRadius;
+    Card cards[TOTAL_CARDS];
+    Texture cardTextures[TOTAL_CARDS];
+    Sprite cardSprites[TOTAL_CARDS];
     Color playerColors[3] = { Color::Red,Color::Blue, Color::Green }; 
     string playerNames[3] = { "Dealer", "Small Blind", "Big Blind" };
     Vector2f playerPositions[3];
@@ -46,6 +51,8 @@ private:
     bool isInsideSpecificAreaInstruccions(Vector2i mousePosition);
     bool isInsideSpecificArea(Vector2i mousePosition);
     void initializeCircleInfo();
+    void loadCardTextures();
+    void drawPlayerHands();
     void render();
 
 public:
@@ -53,7 +60,6 @@ public:
     void loadAndSetInstructionsTexture(string filename);
     void initializePlayerPositions();
     void loadAndSetGameBackgroundTexture(string filename);
-    void drawPlayerCards();
     void drawPlayerCircles();
     void setupUI();
     GameGraphics();

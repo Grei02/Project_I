@@ -3,6 +3,7 @@
 #include "Deck.h"
 #include <algorithm>
 #include <ctime>
+#include <SFML/Graphics.hpp>
 
 static const int TOTAL_CARDS = 52;
 class Deck {
@@ -15,4 +16,5 @@ public:
     void generateDeck();
     void shuffleDeck();
     Card dealCard();
+    void loadTextures(sf::Texture* cardTextures);
 }; 

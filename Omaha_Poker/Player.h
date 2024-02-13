@@ -5,7 +5,6 @@ using namespace std;
 const int Num_Cards = 4;
 class Player {
 private:
-   
     Card playerHand[Num_Cards];
     string playerName;
 public:
