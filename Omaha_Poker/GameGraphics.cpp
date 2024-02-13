@@ -1,5 +1,6 @@
 #include "GameGraphics.h"
 
+<<<<<<< HEAD
 GameGraphics::GameGraphics() : window(VideoMode(1200, 650), "Omaha Poker") {
 	dealer.dealCards();
 	setupStartScreen();
@@ -18,6 +19,13 @@ GameGraphics::~GameGraphics()
 		delete[] cardSprites[i];
 	}
 	delete[] cardSprites;
+=======
+GameGraphics::GameGraphics() : window(sf::VideoMode(1200, 650), "Omaha Poker"), deck(*new Deck()), instructionsLoaded(false) {
+	setupStartScreen();
+	initializePlayerPositions();
+	initializeCircleInfo();
+	loadCardTextures();
+>>>>>>> a040f7ae9bf692dc06e03c89405911bcb6602acd
 }
 
 void GameGraphics::run() {
@@ -116,6 +124,8 @@ void GameGraphics::setupUI() {
 	inputText.setPosition(1045, 45);
 }
 
+
+
 void GameGraphics::handleTextInput(sf::Uint32 unicode) {
 	if (unicode >= '2' && unicode <= '6' && inputText.getString().getSize() < 1) {
 		inputText.setString(inputText.getString() + static_cast<char>(unicode));
@@ -198,13 +208,23 @@ void GameGraphics::drawPlayerCircles() {
 }
 
 void GameGraphics::loadAndSetGameBackgroundTexture(string filename) {
+<<<<<<< HEAD
 	Texture newTexture;
 	if (!newTexture.loadFromFile(filename)) {
 		throw runtime_error("Error al cargar la textura : ");
 	}
 	gameBackgroundTexture = newTexture;
 	gameBackgroundSprite.setTexture(gameBackgroundTexture);
+=======
+    Texture newTexture;
+    if (!newTexture.loadFromFile(filename)) {
+        throw runtime_error("Error al cargar la textura: " + filename);
+    }
+    gameBackgroundTexture = newTexture;
+    gameBackgroundSprite.setTexture(gameBackgroundTexture);
+>>>>>>> a040f7ae9bf692dc06e03c89405911bcb6602acd
 }
+
 	
 void GameGraphics::initializeCircleInfo() {
 	circleRadius = 20.0f;
@@ -218,6 +238,7 @@ bool GameGraphics::isValidCard(const Card& card) {
 	return (card.value >= min_Value && card.value <= max_Value && isValidSymbol(card.symbol));
 }
 
+<<<<<<< HEAD
 bool GameGraphics::isValidSymbol(char symbol) {
 	
 	return (symbol == 'C' || symbol == 'D' || symbol == 'H' || symbol == 'S'); 
@@ -240,6 +261,25 @@ void GameGraphics::drawPlayerCards() {
 				cardSprites[i][j].setPosition(100 + j * 120, 200 + i * 200);
 				cardSprites[i][j].setScale(0.3f, 0.3f);
 			}
+=======
+void GameGraphics::loadCardTextures()
+{
+	for (int i = 0; i < TOTAL_CARDS; ++i) {
+		std::string filename = cards[i].getImagePath();
+		if (!cardTextures[i].loadFromFile(filename)) {
+			std::cerr << "Error cargando la imagen de la carta: " << filename << std::endl;
+		}
+	}
+}
+
+void GameGraphics::drawPlayerHands() {
+	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
+		Card* hand = playerHands[i];
+		for (int j = 0; j < HAND_SIZE; ++j) {
+			int cardIndex = hand[j].getIndex(); 
+			cardSprites[cardIndex].setPosition(playerHandPositions[i] + sf::Vector2f(j * 50, 0)); 
+			window.draw(cardSprites[cardIndex]); 
+>>>>>>> a040f7ae9bf692dc06e03c89405911bcb6602acd
 		}
 	}
 }
@@ -260,13 +300,16 @@ void GameGraphics::render() {
 	}
 
 	if (!instructionsScreen && numPlayersEntered && instructionsLoaded) {
-		window.clear();
 		window.draw(gameBackgroundSprite);
+<<<<<<< HEAD
 		for (int i = 0; i < dealer.getNumPlayers(); ++i) {
 			for (int j = 0; j < 4; ++j) {
 				window.draw(cardSprites[i][j]);
 			}
 		}
+=======
+		drawCards();
+>>>>>>> a040f7ae9bf692dc06e03c89405911bcb6602acd
 	}
 
 	if (drawCircles) {
@@ -277,4 +320,8 @@ void GameGraphics::render() {
 		window.draw(startScreenSprite);
 	}
 	window.display();
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a040f7ae9bf692dc06e03c89405911bcb6602acd

@@ -17,7 +17,6 @@ int main() {
 		game.setupStartScreen();
 		game.loadAndSetInstructionsTexture("images/instructions.png");
 		game.loadAndSetGameBackgroundTexture("images/gameBackground.png");
-		game.drawPlayerCards();
 		game.drawPlayerCircles();
 		game.setupUI();
 	}

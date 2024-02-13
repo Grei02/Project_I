@@ -34,3 +34,13 @@ Card Deck::dealCard() {
     }
     return Card();
 }
+
+void Deck::loadTextures(sf::Texture* cardTextures) {
+    for (int i = 0; i < TOTAL_CARDS; ++i) {
+        std::string filename = cards[i].getImagePath();
+        if (!cardTextures[i].loadFromFile(filename)) {
+            std::cerr << "Error cargando la imagen de la carta: " << filename << std::endl;
+        }
+    }
+}
+

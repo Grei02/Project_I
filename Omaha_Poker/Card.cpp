@@ -10,6 +10,10 @@ char Card::getSymbol()
 	return symbol;
 }
 
+string Card::getImagePath() {
+	return imagePath;
+}
+
 Card::~Card()
 {
 }
