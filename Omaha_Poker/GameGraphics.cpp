@@ -1,9 +1,23 @@
 #include "GameGraphics.h"
 
 GameGraphics::GameGraphics() : window(VideoMode(1200, 650), "Omaha Poker") {
+	dealer.dealCards();
 	setupStartScreen();
 	initializePlayerPositions();
 	initializeCircleInfo();
+
+	cardSprites = new Sprite * [numPlayers];
+	for (int i = 0; i < numPlayers; ++i) {
+		cardSprites[i] = new sf::Sprite[4];
+	}
+}
+
+GameGraphics::~GameGraphics()
+{
+	for (int i = 0; i < maxPlayers; ++i) {
+		delete[] cardSprites[i];
+	}
+	delete[] cardSprites;
 }
 
 void GameGraphics::run() {
@@ -185,7 +199,7 @@ void GameGraphics::drawPlayerCircles() {
 
 void GameGraphics::loadAndSetGameBackgroundTexture(string filename) {
 	Texture newTexture;
-	if (newTexture.loadFromFile(filename)) {
+	if (!newTexture.loadFromFile(filename)) {
 		throw runtime_error("Error al cargar la textura : ");
 	}
 	gameBackgroundTexture = newTexture;
@@ -198,30 +212,38 @@ void GameGraphics::initializeCircleInfo() {
 	playerColors[1] = Color::Green;
 	playerColors[2] = Color::Blue;
 }
+bool GameGraphics::isValidCard(const Card& card) {
+	int min_Value = 2;
+	int max_Value = 14;
+	return (card.value >= min_Value && card.value <= max_Value && isValidSymbol(card.symbol));
+}
 
-void GameGraphics::drawPlayerCards() {
-	dealer.dealCards();
-	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
-		string file = "Pictures/";
-		string format = ".png";
-		Card** playerCards = dealer.getPlayerHands();
-		for (int j = 0; j < 4; ++j) {
-			string cardFileName = file + playerCards[i][j].symbol + to_string(playerCards[i][j].value) + format;
-
-			sf::Texture cardTexture;
-			if (!cardTexture.loadFromFile(cardFileName)) {
-				throw runtime_error("Error al cargar la textura : ");
-			}
-			Sprite cardSprite;
-			cardSprite.setTexture(cardTexture);
-
-			cardSprite.setPosition(100 + j * 120, 200 + i * 200);
-			cardSprite.setScale(0.3f,0.3f);
-			window.draw(cardSprite);
+bool GameGraphics::isValidSymbol(char symbol) {
 	
+	return (symbol == 'C' || symbol == 'D' || symbol == 'H' || symbol == 'S'); 
+}
+void GameGraphics::drawPlayerCards() {
+	string file = "Pictures/";
+	string format = ".png";
+	Card** playerCards = dealer.getPlayerHands();
+
+	for (int i = 0; i < dealer.getNumPlayers(); ++i) {
+		for (int j = 0; j < 4; ++j) {
+			if (isValidCard(playerCards[i][j])) {
+				string cardFileName = file + playerCards[i][j].symbol + to_string(playerCards[i][j].value) + format;
+				Texture cardTexture;
+				if (!cardTexture.loadFromFile(cardFileName)) {
+					throw runtime_error("Error al cargar la textura: " + cardFileName);
+				}
+				cardSprites[i][j].setTexture(cardTexture);
+
+				cardSprites[i][j].setPosition(100 + j * 120, 200 + i * 200);
+				cardSprites[i][j].setScale(0.3f, 0.3f);
+			}
 		}
 	}
 }
+
 
 void GameGraphics::render() {
 	window.clear();
@@ -240,7 +262,11 @@ void GameGraphics::render() {
 	if (!instructionsScreen && numPlayersEntered && instructionsLoaded) {
 		window.clear();
 		window.draw(gameBackgroundSprite);
-		drawPlayerCards();
+		for (int i = 0; i < dealer.getNumPlayers(); ++i) {
+			for (int j = 0; j < 4; ++j) {
+				window.draw(cardSprites[i][j]);
+			}
+		}
 	}
 
 	if (drawCircles) {
@@ -251,5 +277,4 @@ void GameGraphics::render() {
 		window.draw(startScreenSprite);
 	}
 	window.display();
-
 }

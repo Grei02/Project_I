@@ -16,12 +16,15 @@ private:
     Dealer dealer;
     Board board;
     RenderWindow window;
+    Sprite** cardSprites;
     Sprite startScreenSprite;
     Texture startScreenTexture;
     Sprite instructionsSprite;
     Texture instructionsTexture;
     Sprite gameBackgroundSprite;
     Texture gameBackgroundTexture;
+    int maxPlayers;
+    int maxCardsPerPlayer;
     Text text;
     Font font;
     RectangleShape inputBox;
@@ -46,6 +49,7 @@ private:
     bool isInsideSpecificAreaInstruccions(Vector2i mousePosition);
     bool isInsideSpecificArea(Vector2i mousePosition);
     void initializeCircleInfo();
+    bool isValidCard(const Card& card);
     void render();
 
 public:
@@ -53,9 +57,11 @@ public:
     void loadAndSetInstructionsTexture(string filename);
     void initializePlayerPositions();
     void loadAndSetGameBackgroundTexture(string filename);
+    bool isValidSymbol(char symbol);
     void drawPlayerCards();
     void drawPlayerCircles();
     void setupUI();
     GameGraphics();
+    ~GameGraphics();
     void run();
 };
