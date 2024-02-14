@@ -16,5 +16,5 @@ public:
     void generateDeck();
     void shuffleDeck();
     Card dealCard();
-    void loadTextures(sf::Texture* cardTextures);
+ 
 }; 

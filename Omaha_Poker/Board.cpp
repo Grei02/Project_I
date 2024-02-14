@@ -21,7 +21,6 @@ void Board::displayPlayerHands() {
 	}
 }
 
-
 void Board::displayCommunityCards() {
 	Card** flop = dealer.getFlop();
 	cout << "Flop: ";

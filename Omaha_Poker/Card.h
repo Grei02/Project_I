@@ -15,7 +15,5 @@ public:
 	int getValue();
 	char getSymbol();
 
-	string getImagePath();
-
 	~Card();
 };
